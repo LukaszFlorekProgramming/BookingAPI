@@ -19,34 +19,7 @@ namespace Booking.Persistance
         public DbSet<Room> Rooms { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Room>(d =>
-            {
-                d.HasData(new Room()
-                {
-                    Id = 1,
-                    Name = "Room1",
-                    Capacity = 10,
-                    IsBooked = false
-                });
-            });
-
-            modelBuilder.Entity<Reservation>(d =>
-            {
-                d.HasData(new Reservation()
-                {
-                    Id = 1,
-                    StartDate = DateTime.Now,
-                    EndDate = DateTime.Now,
-                    CreatedBy = string.Empty,
-                    Created = DateTime.Now,
-                    ModifiedBy = string.Empty,
-                    Modified = DateTime.Now,
-                    StatusId = 1,
-                    InactivatedBy = string.Empty,
-                    Inactivated = DateTime.Now
-                });
-
-            });
+            modelBuilder.SeedData();
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken()) 

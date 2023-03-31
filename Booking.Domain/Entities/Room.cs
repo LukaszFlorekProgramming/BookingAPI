@@ -13,7 +13,5 @@ namespace Booking.Persistance.Entities
         public int Capacity { get; set; }
         public bool IsBooked { get; set; }
         public ICollection<Reservation> Reservations { get; set; } 
-
-
     }
 }

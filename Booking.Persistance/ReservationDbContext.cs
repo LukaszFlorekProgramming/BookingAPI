@@ -1,4 +1,5 @@
 ﻿using Booking.Domain.Common;
+using Booking.Persistance.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace Booking.Persistance
         {
             
         }
+        public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<Room> Rooms { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
         }

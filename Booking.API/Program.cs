@@ -1,6 +1,13 @@
 using Booking.Infrastructure;
+using Booking.Persistance;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<ReservationDbContext>(option =>
+{
+    option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
+});
 
 // Add services to the container.
 builder.Services.AddInfrastructure();

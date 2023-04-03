@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Booking.Persistance
 {
-    public class ReservationDbContext : DbContext
+    public class ReservationDbContext : DbContext, IReservationDbContext
     {
         private readonly IDateTime _dateTime;
         public ReservationDbContext(DbContextOptions<ReservationDbContext> options,IDateTime dateTime) : base(options)

@@ -4,6 +4,7 @@ using Booking.Persistance;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Booking.Persistance.Migrations
 {
     [DbContext(typeof(ReservationDbContext))]
-    partial class ReservationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230331174210_fix")]
+    partial class fix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,34 +71,6 @@ namespace Booking.Persistance.Migrations
                     b.HasIndex("RoomId");
 
                     b.ToTable("Reservations");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Created = new DateTime(2023, 4, 3, 14, 7, 41, 888, DateTimeKind.Local).AddTicks(5514),
-                            CreatedBy = "",
-                            EndDate = new DateTime(2023, 4, 3, 14, 7, 41, 888, DateTimeKind.Local).AddTicks(5511),
-                            Inactivated = new DateTime(2023, 4, 3, 14, 7, 41, 888, DateTimeKind.Local).AddTicks(5518),
-                            InactivatedBy = "",
-                            Modified = new DateTime(2023, 4, 3, 14, 7, 41, 888, DateTimeKind.Local).AddTicks(5516),
-                            ModifiedBy = "",
-                            StartDate = new DateTime(2023, 4, 3, 14, 7, 41, 888, DateTimeKind.Local).AddTicks(5474),
-                            StatusId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Created = new DateTime(2023, 4, 3, 14, 7, 41, 888, DateTimeKind.Local).AddTicks(5524),
-                            CreatedBy = "",
-                            EndDate = new DateTime(2023, 4, 3, 14, 7, 41, 888, DateTimeKind.Local).AddTicks(5523),
-                            Inactivated = new DateTime(2023, 4, 3, 14, 7, 41, 888, DateTimeKind.Local).AddTicks(5527),
-                            InactivatedBy = "",
-                            Modified = new DateTime(2023, 4, 3, 14, 7, 41, 888, DateTimeKind.Local).AddTicks(5525),
-                            ModifiedBy = "",
-                            StartDate = new DateTime(2023, 4, 3, 14, 7, 41, 888, DateTimeKind.Local).AddTicks(5521),
-                            StatusId = 1
-                        });
                 });
 
             modelBuilder.Entity("Booking.Persistance.Entities.Room", b =>
@@ -119,29 +94,6 @@ namespace Booking.Persistance.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Rooms");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Capacity = 10,
-                            IsBooked = false,
-                            Name = "Room1"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Capacity = 10,
-                            IsBooked = false,
-                            Name = "Room2"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Capacity = 10,
-                            IsBooked = false,
-                            Name = "Room3"
-                        });
                 });
 
             modelBuilder.Entity("Booking.Persistance.Entities.Reservation", b =>

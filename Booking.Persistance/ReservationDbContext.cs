@@ -29,7 +29,7 @@ namespace Booking.Persistance
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken()) 
         {
-            foreach(var entry in ChangeTracker.Entries<AuditableEntity>())
+            /*foreach(var entry in ChangeTracker.Entries<AuditableEntity>())
             {
                 switch (entry.State)
                 {
@@ -53,7 +53,7 @@ namespace Booking.Persistance
                         break;
                     
                 }
-            }
+            }*/
             return base.SaveChangesAsync(cancellationToken);
         }
     }

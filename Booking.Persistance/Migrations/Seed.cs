@@ -42,38 +42,19 @@ namespace Booking.Persistance.Migrations
                     Id = 1,
                     StartDate = DateTime.Now,
                     EndDate = DateTime.Now,
-                    CreatedBy=string.Empty,
-                    Created=DateTime.Now,
-                    ModifiedBy=string.Empty,
-                    Modified=DateTime.Now,
-                    StatusId=1,
-                    Inactivated=DateTime.Now,
-                    InactivatedBy=string.Empty
+                    
                 },
                 new Reservation()
                 {
                     Id = 2,
                     StartDate = DateTime.Now,
                     EndDate = DateTime.Now,
-                    CreatedBy=string.Empty,
-                    Created=DateTime.Now,
-                    ModifiedBy=string.Empty,
-                    Modified=DateTime.Now,
-                    StatusId=1,
-                    Inactivated=DateTime.Now,
-                    InactivatedBy=string.Empty
+                    
                 },new Reservation()
                 {
                     Id = 3,
                     StartDate = DateTime.Now,
                     EndDate = DateTime.Now,
-                    CreatedBy=string.Empty,
-                    Created=DateTime.Now,
-                    ModifiedBy=string.Empty,
-                    Modified=DateTime.Now,
-                    StatusId=1,
-                    Inactivated=DateTime.Now,
-                    InactivatedBy=string.Empty
                 }
                 );
         }

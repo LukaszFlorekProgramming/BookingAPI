@@ -19,7 +19,7 @@ namespace Booking.Persistance
         public DbSet<Room> Rooms { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            /*modelBuilder.Entity<Room>(d =>
+            modelBuilder.Entity<Room>(d =>
             {
                 d.HasData(new Room()
                 {
@@ -27,19 +27,49 @@ namespace Booking.Persistance
                     Name = "Room1",
                     Capacity = 10,
                     IsBooked = false
+                }, new Room()
+                {
+                    Id = 2,
+                    Name = "Room2",
+                    Capacity = 10,
+                    IsBooked = false
+                },
+                new Room()
+                {
+                    Id = 3,
+                    Name = "Room3",
+                    Capacity = 10,
+                    IsBooked = false
                 });
             });
 
-            modelBuilder.Entity<Reservation>(d =>
-            {
-                d.HasData(new Reservation()
+            modelBuilder.Entity<Reservation>().HasData(
+                new Reservation()
                 {
                     Id = 1,
                     StartDate = DateTime.Now,
-                    EndDate = DateTime.Now
+                    EndDate = DateTime.Now,
+                    CreatedBy=string.Empty,
+                    Created=DateTime.Now,
+                    ModifiedBy=string.Empty,
+                    Modified=DateTime.Now,
+                    StatusId=1,
+                    Inactivated=DateTime.Now,
+                    InactivatedBy=string.Empty
+                },
+                new Reservation()
+                {
+                    Id = 2,
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now,
+                    CreatedBy=string.Empty,
+                    Created=DateTime.Now,
+                    ModifiedBy=string.Empty,
+                    Modified=DateTime.Now,
+                    StatusId=1,
+                    Inactivated=DateTime.Now,
+                    InactivatedBy=string.Empty
                 });
-
-            });*/
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken()) 

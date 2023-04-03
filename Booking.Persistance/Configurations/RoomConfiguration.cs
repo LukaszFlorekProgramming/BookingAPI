@@ -1,4 +1,5 @@
 ﻿using Booking.Persistance.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -17,7 +18,7 @@ namespace Booking.Persistance.Configurations
 
             builder.Property(x => x.Name).HasMaxLength(40);
             builder.Property(x => x.Name).IsRequired();
-
+            builder.Property(x => x.Capacity).IsRequired();
         }
     }
 }

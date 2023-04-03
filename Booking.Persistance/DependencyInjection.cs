@@ -1,5 +1,5 @@
 ﻿using Booking.Application.Interfaces;
-using Booking.Infrastructure.Services;
+using Booking.Persistance;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -11,9 +11,9 @@ namespace Booking.Infrastructure
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services)
+        public static IServiceCollection AddPersistance(this IServiceCollection services)
         {
-            services.AddTransient<IDateTime, DateTimeService>();
+            services.AddScoped<IReservationDbContext, ReservationDbContext>();
             return services;
         }
     }

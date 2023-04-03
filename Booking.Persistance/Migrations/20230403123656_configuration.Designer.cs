@@ -4,6 +4,7 @@ using Booking.Persistance;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Booking.Persistance.Migrations
 {
     [DbContext(typeof(ReservationDbContext))]
-    partial class ReservationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230403123656_configuration")]
+    partial class configuration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,14 +33,38 @@ namespace Booking.Persistance.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("Inactivated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("InactivatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("Modified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("RoomId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -49,20 +76,28 @@ namespace Booking.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            EndDate = new DateTime(2023, 4, 3, 21, 43, 11, 691, DateTimeKind.Local).AddTicks(4742),
-                            StartDate = new DateTime(2023, 4, 3, 21, 43, 11, 691, DateTimeKind.Local).AddTicks(4703)
+                            Created = new DateTime(2023, 4, 3, 14, 36, 56, 261, DateTimeKind.Local).AddTicks(3736),
+                            CreatedBy = "",
+                            EndDate = new DateTime(2023, 4, 3, 14, 36, 56, 261, DateTimeKind.Local).AddTicks(3734),
+                            Inactivated = new DateTime(2023, 4, 3, 14, 36, 56, 261, DateTimeKind.Local).AddTicks(3740),
+                            InactivatedBy = "",
+                            Modified = new DateTime(2023, 4, 3, 14, 36, 56, 261, DateTimeKind.Local).AddTicks(3737),
+                            ModifiedBy = "",
+                            StartDate = new DateTime(2023, 4, 3, 14, 36, 56, 261, DateTimeKind.Local).AddTicks(3698),
+                            StatusId = 1
                         },
                         new
                         {
                             Id = 2,
-                            EndDate = new DateTime(2023, 4, 3, 21, 43, 11, 691, DateTimeKind.Local).AddTicks(4745),
-                            StartDate = new DateTime(2023, 4, 3, 21, 43, 11, 691, DateTimeKind.Local).AddTicks(4744)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            EndDate = new DateTime(2023, 4, 3, 21, 43, 11, 691, DateTimeKind.Local).AddTicks(4748),
-                            StartDate = new DateTime(2023, 4, 3, 21, 43, 11, 691, DateTimeKind.Local).AddTicks(4747)
+                            Created = new DateTime(2023, 4, 3, 14, 36, 56, 261, DateTimeKind.Local).AddTicks(3745),
+                            CreatedBy = "",
+                            EndDate = new DateTime(2023, 4, 3, 14, 36, 56, 261, DateTimeKind.Local).AddTicks(3743),
+                            Inactivated = new DateTime(2023, 4, 3, 14, 36, 56, 261, DateTimeKind.Local).AddTicks(3748),
+                            InactivatedBy = "",
+                            Modified = new DateTime(2023, 4, 3, 14, 36, 56, 261, DateTimeKind.Local).AddTicks(3746),
+                            ModifiedBy = "",
+                            StartDate = new DateTime(2023, 4, 3, 14, 36, 56, 261, DateTimeKind.Local).AddTicks(3742),
+                            StatusId = 1
                         });
                 });
 

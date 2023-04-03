@@ -2,6 +2,7 @@ using Booking.Application;
 using Booking.Infrastructure;
 using Booking.Persistance;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,7 @@ builder.Services.AddDbContext<ReservationDbContext>(option =>
 });
 
 // Add services to the container.
+//builder.Services.AddMediatR(typeof(Startup));
 builder.Services.AddApplication();
 builder.Services.AddPersistance();
 builder.Services.AddInfrastructure();

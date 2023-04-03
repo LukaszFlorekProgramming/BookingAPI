@@ -22,7 +22,7 @@ namespace Booking.Application.Reservations.Queries.GetReservationDetail
         }
         public async Task<ReservationDetailVm> Handle(GetReservationDetailQuery request, CancellationToken cancellationToken)
         {
-            var reservation = await _context.Reservations.Where(x => x.Id == request.ReservationId).FirstOrDefaultAsync(cancellationToken);
+            var reservation = await _context.Reservations.Include(x => x.Room).Where(x => x.Id == request.ReservationId).FirstOrDefaultAsync(cancellationToken);
             var reservationVm = _mapper.Map<ReservationDetailVm>(reservation);
 
             return reservationVm;

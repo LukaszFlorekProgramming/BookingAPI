@@ -1,3 +1,4 @@
+using Booking.Application;
 using Booking.Infrastructure;
 using Booking.Persistance;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ builder.Services.AddDbContext<ReservationDbContext>(option =>
 });
 
 // Add services to the container.
+builder.Services.AddApplication();
 builder.Services.AddPersistance();
 builder.Services.AddInfrastructure();
 builder.Services.AddControllers();

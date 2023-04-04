@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Booking.Infrastructure.Services
 {
-    internal class DateTimeService : IDateTime
+    public class DateTimeService : IDateTime
     {
         public DateTime Now => DateTime.Now;
     }

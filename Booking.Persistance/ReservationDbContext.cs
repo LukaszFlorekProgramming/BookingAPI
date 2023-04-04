@@ -1,6 +1,7 @@
 ﻿using Booking.Application.Interfaces;
 using Booking.Domain.Common;
 using Booking.Persistance.Entities;
+using Booking.Persistance.Migrations;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,12 +12,12 @@ using System.Threading.Tasks;
 
 namespace Booking.Persistance
 {
-    public class ReservationDbContext : DbContext
+    public class ReservationDbContext : DbContext, IReservationDbContext
     {
         private readonly IDateTime _dateTime;
-        public ReservationDbContext(DbContextOptions<ReservationDbContext> options, IDateTime dateTime) : base(options)
+        public ReservationDbContext(DbContextOptions<ReservationDbContext> options,IDateTime dateTime) : base(options)
         {
-            _dateTime = dateTime;
+            _dateTime=dateTime;
         }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Room> Rooms { get; set; }
@@ -28,7 +29,7 @@ namespace Booking.Persistance
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken()) 
         {
-            foreach(var entry in ChangeTracker.Entries<AuditableEntity>())
+            /*foreach(var entry in ChangeTracker.Entries<AuditableEntity>())
             {
                 switch (entry.State)
                 {
@@ -52,7 +53,7 @@ namespace Booking.Persistance
                         break;
                     
                 }
-            }
+            }*/
             return base.SaveChangesAsync(cancellationToken);
         }
     }

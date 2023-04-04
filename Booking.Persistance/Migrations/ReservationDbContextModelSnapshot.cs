@@ -30,38 +30,14 @@ namespace Booking.Persistance.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("Inactivated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("InactivatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("Modified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ModifiedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("RoomId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("StatusId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -73,15 +49,20 @@ namespace Booking.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            Created = new DateTime(2023, 3, 31, 22, 36, 25, 338, DateTimeKind.Local).AddTicks(255),
-                            CreatedBy = "",
-                            EndDate = new DateTime(2023, 3, 31, 22, 36, 25, 338, DateTimeKind.Local).AddTicks(245),
-                            Inactivated = new DateTime(2023, 3, 31, 22, 36, 25, 338, DateTimeKind.Local).AddTicks(272),
-                            InactivatedBy = "",
-                            Modified = new DateTime(2023, 3, 31, 22, 36, 25, 338, DateTimeKind.Local).AddTicks(262),
-                            ModifiedBy = "",
-                            StartDate = new DateTime(2023, 3, 31, 22, 36, 25, 338, DateTimeKind.Local).AddTicks(165),
-                            StatusId = 1
+                            EndDate = new DateTime(2023, 4, 3, 22, 50, 55, 749, DateTimeKind.Local).AddTicks(4100),
+                            StartDate = new DateTime(2023, 4, 3, 22, 50, 55, 749, DateTimeKind.Local).AddTicks(4061)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            EndDate = new DateTime(2023, 4, 3, 22, 50, 55, 749, DateTimeKind.Local).AddTicks(4103),
+                            StartDate = new DateTime(2023, 4, 3, 22, 50, 55, 749, DateTimeKind.Local).AddTicks(4102)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            EndDate = new DateTime(2023, 4, 3, 22, 50, 55, 749, DateTimeKind.Local).AddTicks(4106),
+                            StartDate = new DateTime(2023, 4, 3, 22, 50, 55, 749, DateTimeKind.Local).AddTicks(4105)
                         });
                 });
 
@@ -115,6 +96,20 @@ namespace Booking.Persistance.Migrations
                             Capacity = 10,
                             IsBooked = false,
                             Name = "Room1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Capacity = 10,
+                            IsBooked = false,
+                            Name = "Room2"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Capacity = 10,
+                            IsBooked = false,
+                            Name = "Room3"
                         });
                 });
 

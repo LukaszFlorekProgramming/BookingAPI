@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Booking.Persistance.Migrations
 {
     [DbContext(typeof(ReservationDbContext))]
-    [Migration("20230331135413_initial")]
+    [Migration("20230404174710_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -33,29 +33,8 @@ namespace Booking.Persistance.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("Inactivated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("InactivatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ModifiedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("RoomId")
                         .HasColumnType("int");
@@ -63,14 +42,31 @@ namespace Booking.Persistance.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("StatusId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("RoomId");
 
                     b.ToTable("Reservations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            EndDate = new DateTime(2023, 4, 4, 19, 47, 9, 877, DateTimeKind.Local).AddTicks(1735),
+                            StartDate = new DateTime(2023, 4, 4, 19, 47, 9, 877, DateTimeKind.Local).AddTicks(1661)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            EndDate = new DateTime(2023, 4, 4, 19, 47, 9, 877, DateTimeKind.Local).AddTicks(1743),
+                            StartDate = new DateTime(2023, 4, 4, 19, 47, 9, 877, DateTimeKind.Local).AddTicks(1740)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            EndDate = new DateTime(2023, 4, 4, 19, 47, 9, 877, DateTimeKind.Local).AddTicks(1751),
+                            StartDate = new DateTime(2023, 4, 4, 19, 47, 9, 877, DateTimeKind.Local).AddTicks(1748)
+                        });
                 });
 
             modelBuilder.Entity("Booking.Persistance.Entities.Room", b =>
@@ -89,11 +85,35 @@ namespace Booking.Persistance.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Rooms");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Capacity = 10,
+                            IsBooked = false,
+                            Name = "Room1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Capacity = 10,
+                            IsBooked = false,
+                            Name = "Room2"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Capacity = 10,
+                            IsBooked = false,
+                            Name = "Room3"
+                        });
                 });
 
             modelBuilder.Entity("Booking.Persistance.Entities.Reservation", b =>

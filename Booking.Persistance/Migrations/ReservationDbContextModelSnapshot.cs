@@ -49,20 +49,20 @@ namespace Booking.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            EndDate = new DateTime(2023, 4, 3, 22, 50, 55, 749, DateTimeKind.Local).AddTicks(4100),
-                            StartDate = new DateTime(2023, 4, 3, 22, 50, 55, 749, DateTimeKind.Local).AddTicks(4061)
+                            EndDate = new DateTime(2023, 4, 4, 19, 47, 9, 877, DateTimeKind.Local).AddTicks(1735),
+                            StartDate = new DateTime(2023, 4, 4, 19, 47, 9, 877, DateTimeKind.Local).AddTicks(1661)
                         },
                         new
                         {
                             Id = 2,
-                            EndDate = new DateTime(2023, 4, 3, 22, 50, 55, 749, DateTimeKind.Local).AddTicks(4103),
-                            StartDate = new DateTime(2023, 4, 3, 22, 50, 55, 749, DateTimeKind.Local).AddTicks(4102)
+                            EndDate = new DateTime(2023, 4, 4, 19, 47, 9, 877, DateTimeKind.Local).AddTicks(1743),
+                            StartDate = new DateTime(2023, 4, 4, 19, 47, 9, 877, DateTimeKind.Local).AddTicks(1740)
                         },
                         new
                         {
                             Id = 3,
-                            EndDate = new DateTime(2023, 4, 3, 22, 50, 55, 749, DateTimeKind.Local).AddTicks(4106),
-                            StartDate = new DateTime(2023, 4, 3, 22, 50, 55, 749, DateTimeKind.Local).AddTicks(4105)
+                            EndDate = new DateTime(2023, 4, 4, 19, 47, 9, 877, DateTimeKind.Local).AddTicks(1751),
+                            StartDate = new DateTime(2023, 4, 4, 19, 47, 9, 877, DateTimeKind.Local).AddTicks(1748)
                         });
                 });
 

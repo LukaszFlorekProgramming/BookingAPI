@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Booking.Persistance.Migrations
 {
     /// <inheritdoc />
@@ -17,7 +19,7 @@ namespace Booking.Persistance.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     Capacity = table.Column<int>(type: "int", nullable: false),
                     IsBooked = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -34,14 +36,7 @@ namespace Booking.Persistance.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    RoomId = table.Column<int>(type: "int", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Modified = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    StatusId = table.Column<int>(type: "int", nullable: false),
-                    InactivatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Inactivated = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    RoomId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -51,6 +46,26 @@ namespace Booking.Persistance.Migrations
                         column: x => x.RoomId,
                         principalTable: "Rooms",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.InsertData(
+                table: "Reservations",
+                columns: new[] { "Id", "EndDate", "RoomId", "StartDate" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 4, 4, 19, 47, 9, 877, DateTimeKind.Local).AddTicks(1735), null, new DateTime(2023, 4, 4, 19, 47, 9, 877, DateTimeKind.Local).AddTicks(1661) },
+                    { 2, new DateTime(2023, 4, 4, 19, 47, 9, 877, DateTimeKind.Local).AddTicks(1743), null, new DateTime(2023, 4, 4, 19, 47, 9, 877, DateTimeKind.Local).AddTicks(1740) },
+                    { 3, new DateTime(2023, 4, 4, 19, 47, 9, 877, DateTimeKind.Local).AddTicks(1751), null, new DateTime(2023, 4, 4, 19, 47, 9, 877, DateTimeKind.Local).AddTicks(1748) }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Rooms",
+                columns: new[] { "Id", "Capacity", "IsBooked", "Name" },
+                values: new object[,]
+                {
+                    { 1, 10, false, "Room1" },
+                    { 2, 10, false, "Room2" },
+                    { 3, 10, false, "Room3" }
                 });
 
             migrationBuilder.CreateIndex(

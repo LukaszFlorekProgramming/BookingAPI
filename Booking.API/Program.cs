@@ -2,9 +2,12 @@ using Booking.Application;
 using Booking.Infrastructure;
 using Booking.Persistance;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
 
 builder.Services.AddDbContext<ReservationDbContext>(option =>
 {
@@ -12,7 +15,7 @@ builder.Services.AddDbContext<ReservationDbContext>(option =>
 });
 
 // Add services to the container.
-//builder.Services.AddMediatR(typeof(Startup));
+
 builder.Services.AddApplication();
 builder.Services.AddPersistance();
 builder.Services.AddInfrastructure();
@@ -30,6 +33,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseSerilogRequestLogging();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

@@ -20,7 +20,5 @@ namespace Booking.Application.Reservations.Queries.GetReservations
             profile.CreateMap<Reservation, ReservationDto>()
                 .ForMember(d => d.Id, map => map.MapFrom(src => src.Id));
         }
-
-
     }
 }

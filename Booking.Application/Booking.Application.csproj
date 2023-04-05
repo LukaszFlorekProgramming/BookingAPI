@@ -19,8 +19,4 @@
     <ProjectReference Include="..\Booking.Domain\Booking.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Reservations\Commands\UpdateReservation\" />
-  </ItemGroup>
-
 </Project>

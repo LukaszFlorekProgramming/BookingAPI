@@ -1,6 +1,7 @@
 ﻿using Booking.Application.Reservations.Commands.CreateReservation;
 using Booking.Application.Reservations.Commands.DeleteReservation;
 using Booking.Application.Reservations.Queries.GetReservationDetail;
+using Booking.Application.Reservations.Queries.GetReservations;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Booking.API.Controllers
@@ -8,6 +9,12 @@ namespace Booking.API.Controllers
     [Route("api/reservations")]
     public class ReservationController : BaseController
     {
+        [HttpGet]
+        public async Task<ActionResult<ReservationsVm>> GetReservations()
+        {
+            var vm = await Mediator.Send(new GetReservationsQuery());
+            return vm;
+        }
         [HttpGet("{id}")]
         public async Task<ActionResult<ReservationDetailVm>> GetDetails(int id)
         {

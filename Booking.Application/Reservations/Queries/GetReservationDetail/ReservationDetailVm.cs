@@ -17,7 +17,5 @@ namespace Booking.Application.Reservations.Queries.GetReservationDetail
         {
             profile.CreateMap<Reservation, ReservationDetailVm>().ForMember(x => x.RoomId, map => map.MapFrom(src => src.RoomId.Value));
         }
-
-
     }
 }

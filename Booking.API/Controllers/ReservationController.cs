@@ -1,4 +1,5 @@
 ﻿using Booking.Application.Reservations.Commands.CreateReservation;
+using Booking.Application.Reservations.Commands.DeleteReservation;
 using Booking.Application.Reservations.Queries.GetReservationDetail;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,12 @@ namespace Booking.API.Controllers
             var result = await Mediator.Send(command);
             return Ok(result);
         }
-        
+        [HttpDelete]
+        public async Task<IActionResult> DeleteReservation(DeleteReservationCommand command)
+        {
+            await Mediator.Send(command);
+            return Ok();
+        }
+
     }
 }

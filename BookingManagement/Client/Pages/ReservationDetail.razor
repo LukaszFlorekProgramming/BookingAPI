@@ -1,0 +1,29 @@
+﻿@page "/reservation"
+@using BookingManagement.Client.Models;
+@inject HttpClient Http
+
+@if (reservation == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h3>Reservations Detail</h3>
+    <div class="card" style="width:18rem;"></div>
+    <div class="card-body">
+        <h5>@reservation.Id</h5>
+        <h5>@reservation.StartDate</h5>
+        <h5>@reservation.EndDate</h5>
+        <h5>@reservation.RoomId</h5>
+        <a href="#" class="btn btn-primary" >Edit or something</a>
+    </div>
+}
+
+@code {
+    private ReservationDetailVm reservation;
+
+    protected override async Task OnInitializedAsync()
+    {
+        reservation = await Http.GetFromJsonAsync<ReservationDetailVm>("https://localhost:7269/api/reservations/1");
+    }
+}

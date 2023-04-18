@@ -1,0 +1,46 @@
+﻿@using BookingManagement.Client.Models;
+@inject IJSRuntime JSRuntime
+@implements IAsyncDisposable
+
+<h3>ReservationTable</h3>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var reservation in Reservations)
+        {
+            <tr>
+                <td>@reservation.Id</td>
+                @* <td><button @onclick="() => SayHi(reservation.Id.ToString())">Przywitaj się</button></td>*@
+                
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    [Parameter]
+    public List<ReservationDto> Reservations { get; set; }
+
+    private Task<IJSObjectReference> _module;
+    private Task<IJSObjectReference> Module => _module ??= JSRuntime.InvokeAsync<IJSObjectReference>("import","./js/reservation.js").AsTask();
+
+    async Task SayHi(string name)
+    {
+        var module = await Module;
+        await module.InvokeVoidAsync("sayHi", name);
+    }
+    public async ValueTask DisposeAsync()
+    {
+        if(_module != null)
+        {
+            var module = await _module;
+            await module.DisposeAsync();
+        }
+    }
+}

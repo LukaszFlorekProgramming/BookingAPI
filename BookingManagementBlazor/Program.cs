@@ -1,4 +1,4 @@
-using BookingManagementBlazor.Data;
+using BookingManagementBlazor.Models;
 using BookingManagementBlazor.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;

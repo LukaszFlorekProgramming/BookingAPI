@@ -1,4 +1,4 @@
-﻿namespace BookingManagementBlazor.Data
+﻿namespace BookingManagementBlazor.Models
 {
     public class ReservationTest
     {

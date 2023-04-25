@@ -11,6 +11,7 @@ namespace Booking.API.Controllers
     public class ReservationController : BaseController
     {
         [HttpGet]
+        [Route("GetReservations")]
         public async Task<ActionResult<ReservationsVm>> GetReservations()
         {
             var vm = await Mediator.Send(new GetReservationsQuery());

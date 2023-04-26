@@ -5,5 +5,6 @@ namespace BookingManagementBlazor.Services.Room
     public interface IRoomService
     {
         Task<RoomsVm> GetRooms();
+        Task<RoomDto> CreateRoom(RoomDto roomDto);
     }
 }

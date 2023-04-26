@@ -1,0 +1,59 @@
+﻿@page "/rooms"
+@using BookingManagementBlazor.Models.Room;
+@using BookingManagementBlazor.Services.Room;
+@inject IRoomService IRoomService
+
+<PageTitle>Rooms</PageTitle>
+
+<h1>Room List API</h1>
+
+<table class="table table-striped table-bordered bg-light">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Capacity</th>
+            <th>IsBooked</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @if (RoomResponse.Rooms == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            @foreach (var reservation in roomsList)
+            {
+                @foreach (var reservationElement in reservation.Rooms)
+                {
+                    <tr>
+                        <td>@reservationElement.Id</td>
+                        <td>@reservationElement.Name</td>
+                        <td>@reservationElement.Capacity</td>
+                        <td>@reservationElement.IsBooked</td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>
+
+
+@code {
+    public RoomsVm RoomResponse = new RoomsVm();
+    public List<RoomsVm> roomsList = new List<RoomsVm>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetRooms();
+    }
+
+    private async Task GetRooms()
+    {
+        RoomResponse = await IRoomService.GetRooms();
+        roomsList.Add(RoomResponse);
+    }
+
+}

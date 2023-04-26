@@ -1,59 +1,59 @@
-﻿@page "/rooms"
+﻿@page "/room"
 @using BookingManagementBlazor.Models.Room;
 @using BookingManagementBlazor.Services.Room;
+@inject NavigationManager NavigationManager
 @inject IRoomService IRoomService
 
-<PageTitle>Rooms</PageTitle>
+<PageTitle>New Room</PageTitle>
 
-<h1>Room List API</h1>
+<h3>New Room</h3>
 
-<table class="table table-striped table-bordered bg-light">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Capacity</th>
-            <th>IsBooked</th>
-        </tr>
-    </thead>
-    <tbody>
-
-        @if (RoomResponse.Rooms == null)
-        {
-            <p><em>Loading...</em></p>
-        }
-        else
-        {
-            @foreach (var reservation in roomsList)
-            {
-                @foreach (var reservationElement in reservation.Rooms)
-                {
-                    <tr>
-                        <td>@reservationElement.Id</td>
-                        <td>@reservationElement.Name</td>
-                        <td>@reservationElement.Capacity</td>
-                        <td>@reservationElement.IsBooked</td>
-                    </tr>
-                }
-            }
-        }
-    </tbody>
-</table>
-
+<div class="row">
+    <div class="col-sm-4">
+        <EditForm Model="@roomDto" OnSubmit="AddRoom">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name:</label>
+                <InputText id="name" @bind-Value="roomDto.Name" class="form-control"></InputText>
+            </div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Capacity:</label>
+                <InputNumber id="name" @bind-Value="roomDto.Capacity" class="form-control"></InputNumber>
+            </div>
+            <div class="mb-3">
+                <InputRadioGroup @bind-Value="@roomDto.IsBooked">
+                    <InputRadio Value="true" /> Tak
+                    <InputRadio Value="false" /> Nie
+                </InputRadioGroup>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </EditForm>
+    </div>
+</div>
 
 @code {
-    public RoomsVm RoomResponse = new RoomsVm();
-    public List<RoomsVm> roomsList = new List<RoomsVm>();
+    private RoomDto roomDto = new()
+    {
+            Name = string.Empty,
+            Capacity = 0,
+            IsBooked = false
+    };
 
     protected override async Task OnInitializedAsync()
     {
-        await GetRooms();
+        await AddRoom();
     }
 
-    private async Task GetRooms()
+    private async Task AddRoom()
     {
-        RoomResponse = await IRoomService.GetRooms();
-        roomsList.Add(RoomResponse);
+        if (roomDto.Name != string.Empty)
+        {
+            roomDto = await IRoomService.CreateRoom(roomDto);
+            NavigationManager.NavigateTo("/rooms");
+        }
+        
     }
+        //NavigationManager.NavigateTo("/rooms");
+        
+    
 
 }

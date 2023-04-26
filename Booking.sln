@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingManagement.Client", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingManagement.Shared", "BookingManagement\Shared\BookingManagement.Shared.csproj", "{5904C84B-43D8-4D1B-9608-4D0BF710B302}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingManagementBlazor", "BookingManagementBlazor\BookingManagementBlazor.csproj", "{9A84B964-7955-40B8-9843-9FF2ED0FB14E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookingManagementBlazor", "BookingManagementBlazor\BookingManagementBlazor.csproj", "{9A84B964-7955-40B8-9843-9FF2ED0FB14E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

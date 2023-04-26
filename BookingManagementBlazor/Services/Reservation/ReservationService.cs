@@ -1,7 +1,7 @@
-﻿using BookingManagementBlazor.Models;
+﻿using BookingManagementBlazor.Models.Reservation;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BookingManagementBlazor.Services
+namespace BookingManagementBlazor.Services.Reservation
 {
     public class ReservationService : IReservationService
     {

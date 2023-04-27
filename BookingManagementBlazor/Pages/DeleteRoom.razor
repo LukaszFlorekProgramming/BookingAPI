@@ -1,22 +1,16 @@
-﻿@page "/rooms"
+﻿@page "/deleteRoom"
 @using BookingManagementBlazor.Models.Room;
 @using BookingManagementBlazor.Services.Room;
 @inject NavigationManager NavigationManager
 @inject IRoomService IRoomService
-
-<PageTitle>Rooms</PageTitle>
-
-<h1>Room List API</h1>
-<button type="button" class="btn btn-success" @onclick="@AddRoomNavigate">Add Room</button>
+<h3>DeleteRoom</h3>
 
 <table class="table table-striped table-bordered bg-light">
     <thead>
         <tr>
             <th>Id</th>
-            <th>Name</th>
-            <th>Capacity</th>
-            <th>IsBooked</th>
             <th></th>
+            
         </tr>
     </thead>
     <tbody>
@@ -32,14 +26,11 @@
                 @foreach (var roomElement in room.Rooms)
                 {
                     <tr>
-                        <td>@roomElement.Id</td>
-                        <td>@roomElement.Name</td>
-                        <td>@roomElement.Capacity</td>
-                        <td>@roomElement.IsBooked</td>
                         <td>
+                            <span>@roomElement.Id</span>
                             @*<button @onclick="@(() => DeleteRoomById(@roomElement.Id))">Delete</button>*@
-                            <button class="btn btn-danger" @onclick="@(() => IRoomService.DeleteRoom(@roomElement.Id))">Delete</button>
-                            @*<button type="button" class="btn btn-warning" @onclick="@Cancel">Cancel</button>*@
+                            <button @onclick="@(() => IRoomService.DeleteRoom(@roomElement.Id))">Delete</button>
+                            <button type="button" class="btn btn-secondary" @onclick="@Cancel">Cancel</button>
                         </td>
                     </tr>
                 }
@@ -52,7 +43,7 @@
 @code {
     public RoomsVm RoomResponse = new RoomsVm();
     public List<RoomsVm> roomsList = new List<RoomsVm>();
-    public int test=24;
+    public int test = 24;
     protected override async Task OnInitializedAsync()
     {
         await GetRooms();
@@ -64,8 +55,8 @@
         roomsList.Add(RoomResponse);
     }
 
-    public async Task DeleteRoom()
-    { 
+    public async Task DeleteRoom2()
+    {
         await IRoomService.DeleteRoom(test123());
     }
 
@@ -76,12 +67,7 @@
 
     private void Cancel()
     {
-        NavigationManager.NavigateTo("/rooms");
+        NavigationManager.NavigateTo("/deleteRoom");
     }
-    private void AddRoomNavigate()
-    {
-        NavigationManager.NavigateTo("/addRoom");
-    }
-
 
 }

@@ -1,4 +1,4 @@
-﻿@page "/room"
+﻿@page "/addroom"
 @using BookingManagementBlazor.Models.Room;
 @using BookingManagementBlazor.Services.Room;
 @inject NavigationManager NavigationManager
@@ -26,6 +26,7 @@
                 </InputRadioGroup>
             </div>
             <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary" @onclick="@Cancel" >Cancel</button>
         </EditForm>
     </div>
 </div>
@@ -50,10 +51,9 @@
             roomDto = await IRoomService.CreateRoom(roomDto);
             NavigationManager.NavigateTo("/rooms");
         }
-        
     }
-        //NavigationManager.NavigateTo("/rooms");
-        
-    
-
+    private void Cancel()
+    {
+        NavigationManager.NavigateTo("/");
+    }
 }

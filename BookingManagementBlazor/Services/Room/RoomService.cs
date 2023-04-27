@@ -1,5 +1,7 @@
 ﻿using BookingManagementBlazor.Models.Room;
+using BookingManagementBlazor.Pages;
 using Microsoft.AspNetCore.Http.HttpResults;
+using System.Net.Http.Json;
 
 namespace BookingManagementBlazor.Services.Room
 {
@@ -21,6 +23,15 @@ namespace BookingManagementBlazor.Services.Room
         {
             return await _httpClient.GetFromJsonAsync<RoomsVm>("api/rooms/GetRooms");
         }
+
+        public async Task DeleteRoom(int roomId)
+        {
+            //await _httpClient.DeleteAsync($"/api/rooms/{roomId}");
+            var response = await _httpClient.DeleteFromJsonAsync<int>($"/api/rooms/{roomId}");
+        }
+
         
+
+
     }
 }

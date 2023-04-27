@@ -8,6 +8,7 @@ using Booking.Application.Rooms.Commands.UpdateRoom;
 using Booking.Application.Rooms.Queries.GetRoomDetail;
 using Booking.Application.Rooms.Queries.GetRooms;
 using Microsoft.AspNetCore.Mvc;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Booking.API.Controllers
 {
@@ -42,12 +43,18 @@ namespace Booking.API.Controllers
             var result = await Mediator.Send(command);
             return Ok(result);
         }
-
         [HttpDelete]
         public async Task<IActionResult> DeleteRoom(DeleteRoomCommand command)
         {
             await Mediator.Send(command);
             return Ok();
         }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteRoomByID(int id)
+        {
+            await Mediator.Send(new DeleteRoomCommand() { Id = id });
+            return Ok();
+        }
+
     }
 }

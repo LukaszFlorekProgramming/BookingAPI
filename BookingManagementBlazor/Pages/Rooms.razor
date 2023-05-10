@@ -6,8 +6,9 @@
 
 <PageTitle>Rooms</PageTitle>
 
-<h1>Room List API</h1>
+<h1>Room List</h1>
 <button type="button" class="btn btn-success" @onclick="@AddRoomNavigate">Add Room</button>
+<button type="button" class="btn btn-danger" @onclick="@DeleteRoomNavigate">Delete Room</button>
 
 <table class="table table-striped table-bordered bg-light">
     <thead>
@@ -15,8 +16,11 @@
             <th>Id</th>
             <th>Name</th>
             <th>Capacity</th>
-            <th>IsBooked</th>
-            <th></th>
+            <th>PricePerNight</th>
+            <th>Country</th>
+            <th>City</th>
+            <th>BuildingNumber</th>
+            
         </tr>
     </thead>
     <tbody>
@@ -35,12 +39,10 @@
                         <td>@roomElement.Id</td>
                         <td>@roomElement.Name</td>
                         <td>@roomElement.Capacity</td>
-                        <td>@roomElement.IsBooked</td>
-                        <td>
-                            @*<button @onclick="@(() => DeleteRoomById(@roomElement.Id))">Delete</button>*@
-                            <button class="btn btn-danger" @onclick="@(() => IRoomService.DeleteRoom(@roomElement.Id))">Delete</button>
-                            @*<button type="button" class="btn btn-warning" @onclick="@Cancel">Cancel</button>*@
-                        </td>
+                        <td>@roomElement.PricePerNight</td>
+                        <td>@roomElement.Country</td>
+                        <td>@roomElement.City</td>
+                        <td>@roomElement.BuildingNumber</td>
                     </tr>
                 }
             }
@@ -52,28 +54,15 @@
 @code {
     public RoomsVm RoomResponse = new RoomsVm();
     public List<RoomsVm> roomsList = new List<RoomsVm>();
-    public int test=24;
     protected override async Task OnInitializedAsync()
     {
         await GetRooms();
     }
-
     private async Task GetRooms()
     {
         RoomResponse = await IRoomService.GetRooms();
         roomsList.Add(RoomResponse);
     }
-
-    public async Task DeleteRoom()
-    { 
-        await IRoomService.DeleteRoom(test123());
-    }
-
-    public int test123()
-    {
-        return test;
-    }
-
     private void Cancel()
     {
         NavigationManager.NavigateTo("/rooms");
@@ -81,6 +70,10 @@
     private void AddRoomNavigate()
     {
         NavigationManager.NavigateTo("/addRoom");
+    }
+    private void DeleteRoomNavigate()
+    {
+        NavigationManager.NavigateTo("/deleteRoom");
     }
 
 

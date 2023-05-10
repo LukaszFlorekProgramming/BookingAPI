@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Booking.Persistance.Migrations
 {
     [DbContext(typeof(ReservationDbContext))]
-    [Migration("20230404174710_initial")]
-    partial class initial
+    [Migration("20230510120823_UpdatePersistanceRoom")]
+    partial class UpdatePersistanceRoom
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,20 +52,20 @@ namespace Booking.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            EndDate = new DateTime(2023, 4, 4, 19, 47, 9, 877, DateTimeKind.Local).AddTicks(1735),
-                            StartDate = new DateTime(2023, 4, 4, 19, 47, 9, 877, DateTimeKind.Local).AddTicks(1661)
+                            EndDate = new DateTime(2023, 5, 10, 14, 8, 23, 342, DateTimeKind.Local).AddTicks(9369),
+                            StartDate = new DateTime(2023, 5, 10, 14, 8, 23, 342, DateTimeKind.Local).AddTicks(9328)
                         },
                         new
                         {
                             Id = 2,
-                            EndDate = new DateTime(2023, 4, 4, 19, 47, 9, 877, DateTimeKind.Local).AddTicks(1743),
-                            StartDate = new DateTime(2023, 4, 4, 19, 47, 9, 877, DateTimeKind.Local).AddTicks(1740)
+                            EndDate = new DateTime(2023, 5, 10, 14, 8, 23, 342, DateTimeKind.Local).AddTicks(9374),
+                            StartDate = new DateTime(2023, 5, 10, 14, 8, 23, 342, DateTimeKind.Local).AddTicks(9373)
                         },
                         new
                         {
                             Id = 3,
-                            EndDate = new DateTime(2023, 4, 4, 19, 47, 9, 877, DateTimeKind.Local).AddTicks(1751),
-                            StartDate = new DateTime(2023, 4, 4, 19, 47, 9, 877, DateTimeKind.Local).AddTicks(1748)
+                            EndDate = new DateTime(2023, 5, 10, 14, 8, 23, 342, DateTimeKind.Local).AddTicks(9379),
+                            StartDate = new DateTime(2023, 5, 10, 14, 8, 23, 342, DateTimeKind.Local).AddTicks(9377)
                         });
                 });
 
@@ -77,8 +77,19 @@ namespace Booking.Persistance.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("BuildingNumber")
+                        .HasColumnType("int");
+
                     b.Property<int>("Capacity")
                         .HasColumnType("int");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsBooked")
                         .HasColumnType("bit");
@@ -88,6 +99,20 @@ namespace Booking.Persistance.Migrations
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("PricePerNight")
+                        .HasColumnType("float");
+
+                    b.Property<int>("RoomNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Rooms");
@@ -96,23 +121,44 @@ namespace Booking.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            Capacity = 10,
+                            BuildingNumber = 1,
+                            Capacity = 1,
+                            City = "Lublin",
+                            Country = "Polska",
                             IsBooked = false,
-                            Name = "Room1"
+                            Name = "Room1",
+                            PostalCode = "10-203",
+                            PricePerNight = 10.0,
+                            RoomNumber = 1,
+                            Street = "Kresowa"
                         },
                         new
                         {
                             Id = 2,
-                            Capacity = 10,
+                            BuildingNumber = 2,
+                            Capacity = 2,
+                            City = "Lublin",
+                            Country = "Polska",
                             IsBooked = false,
-                            Name = "Room2"
+                            Name = "Room2",
+                            PostalCode = "10-203",
+                            PricePerNight = 12.0,
+                            RoomNumber = 2,
+                            Street = "Kresowa"
                         },
                         new
                         {
                             Id = 3,
-                            Capacity = 10,
+                            BuildingNumber = 3,
+                            Capacity = 3,
+                            City = "Lublin",
+                            Country = "Polska",
                             IsBooked = false,
-                            Name = "Room3"
+                            Name = "Room3",
+                            PostalCode = "10-203",
+                            PricePerNight = 13.0,
+                            RoomNumber = 3,
+                            Street = "Kresowa"
                         });
                 });
 

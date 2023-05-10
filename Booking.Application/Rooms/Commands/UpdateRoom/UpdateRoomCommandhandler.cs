@@ -24,7 +24,14 @@ namespace Booking.Application.Rooms.Commands.UpdateRoom
                 Id = request.Id,
                 Name = request.Name,
                 Capacity = request.Capacity,
-                IsBooked = request.IsBooked
+                IsBooked = request.IsBooked,
+                PricePerNight = request.PricePerNight,
+                Street = request.Street,
+                BuildingNumber = request.BuildingNumber,
+                RoomNumber = request.RoomNumber,
+                PostalCode = request.PostalCode,
+                City = request.City,
+                Country = request.Country
             };
 
             _context.Rooms.Update(room);

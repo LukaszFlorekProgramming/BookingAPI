@@ -21,7 +21,14 @@ namespace Booking.Persistance.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     Capacity = table.Column<int>(type: "int", nullable: false),
-                    IsBooked = table.Column<bool>(type: "bit", nullable: false)
+                    IsBooked = table.Column<bool>(type: "bit", nullable: false),
+                    PricePerNight = table.Column<double>(type: "float", nullable: false),
+                    Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BuildingNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RoomNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Country = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -53,19 +60,19 @@ namespace Booking.Persistance.Migrations
                 columns: new[] { "Id", "EndDate", "RoomId", "StartDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 4, 4, 19, 47, 9, 877, DateTimeKind.Local).AddTicks(1735), null, new DateTime(2023, 4, 4, 19, 47, 9, 877, DateTimeKind.Local).AddTicks(1661) },
-                    { 2, new DateTime(2023, 4, 4, 19, 47, 9, 877, DateTimeKind.Local).AddTicks(1743), null, new DateTime(2023, 4, 4, 19, 47, 9, 877, DateTimeKind.Local).AddTicks(1740) },
-                    { 3, new DateTime(2023, 4, 4, 19, 47, 9, 877, DateTimeKind.Local).AddTicks(1751), null, new DateTime(2023, 4, 4, 19, 47, 9, 877, DateTimeKind.Local).AddTicks(1748) }
+                    { 1, new DateTime(2023, 5, 10, 13, 23, 43, 321, DateTimeKind.Local).AddTicks(5584), null, new DateTime(2023, 5, 10, 13, 23, 43, 321, DateTimeKind.Local).AddTicks(5546) },
+                    { 2, new DateTime(2023, 5, 10, 13, 23, 43, 321, DateTimeKind.Local).AddTicks(5587), null, new DateTime(2023, 5, 10, 13, 23, 43, 321, DateTimeKind.Local).AddTicks(5586) },
+                    { 3, new DateTime(2023, 5, 10, 13, 23, 43, 321, DateTimeKind.Local).AddTicks(5590), null, new DateTime(2023, 5, 10, 13, 23, 43, 321, DateTimeKind.Local).AddTicks(5589) }
                 });
 
             migrationBuilder.InsertData(
                 table: "Rooms",
-                columns: new[] { "Id", "Capacity", "IsBooked", "Name" },
+                columns: new[] { "Id", "BuildingNumber", "Capacity", "City", "Country", "IsBooked", "Name", "PostalCode", "PricePerNight", "RoomNumber", "Street" },
                 values: new object[,]
                 {
-                    { 1, 10, false, "Room1" },
-                    { 2, 10, false, "Room2" },
-                    { 3, 10, false, "Room3" }
+                    { 1, "10", 1, "Lublin", "Polska", false, "Room1", "10-203", 10.0, "1", "Kresowa" },
+                    { 2, "11", 2, "Lublin", "Polska", false, "Room2", "10-203", 12.0, "1", "Kresowa" },
+                    { 3, "13", 3, "Lublin", "Polska", false, "Room3", "10-203", 13.0, "1", "Kresowa" }
                 });
 
             migrationBuilder.CreateIndex(

@@ -9,6 +9,12 @@
     <thead>
         <tr>
             <th>Id</th>
+            <th>Name</th>
+            <th>Capacity</th>
+            <th>PricePerNight</th>
+            <th>Country</th>
+            <th>City</th>
+            <th>BuildingNumber</th>
             <th></th>
             
         </tr>
@@ -26,10 +32,16 @@
                 @foreach (var roomElement in room.Rooms)
                 {
                     <tr>
+
+                        <td>@roomElement.Id</td>
+                        <td>@roomElement.Name</td>
+                        <td>@roomElement.Capacity</td>
+                        <td>@roomElement.PricePerNight</td>
+                        <td>@roomElement.Country</td>
+                        <td>@roomElement.City</td>
                         <td>
-                            <span>@roomElement.Id</span>
-                            @*<button @onclick="@(() => DeleteRoomById(@roomElement.Id))">Delete</button>*@
-                            <button @onclick="@(() => IRoomService.DeleteRoom(@roomElement.Id))">Delete</button>
+                            <button @onclick="@(() => @Delete(@roomElement.Id))">Delete</button>
+
                             <button type="button" class="btn btn-secondary" @onclick="@Cancel">Cancel</button>
                         </td>
                     </tr>
@@ -55,19 +67,15 @@
         roomsList.Add(RoomResponse);
     }
 
-    public async Task DeleteRoom2()
+    private async Task<int> Delete(int id)
     {
-        await IRoomService.DeleteRoom(test123());
-    }
-
-    public int test123()
-    {
-        return test;
+        await IRoomService.DeleteRoom(id);
+        return id;
     }
 
     private void Cancel()
     {
-        NavigationManager.NavigateTo("/deleteRoom");
+        NavigationManager.NavigateTo("/rooms");
     }
 
 }

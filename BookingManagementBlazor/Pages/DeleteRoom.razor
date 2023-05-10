@@ -11,10 +11,10 @@
             <th>Id</th>
             <th>Name</th>
             <th>Capacity</th>
-            <th>PricePerNight</th>
+            <th>Price Per Night</th>
             <th>Country</th>
             <th>City</th>
-            <th>BuildingNumber</th>
+            <th>Building Number</th>
             <th></th>
             
         </tr>
@@ -40,7 +40,7 @@
                         <td>@roomElement.Country</td>
                         <td>@roomElement.City</td>
                         <td>
-                            <button @onclick="@(() => @Delete(@roomElement.Id))">Delete</button>
+                            <button type="button" class="btn btn-danger" @onclick="@(() => @Delete(@roomElement.Id))">Delete</button>
 
                             <button type="button" class="btn btn-secondary" @onclick="@Cancel">Cancel</button>
                         </td>

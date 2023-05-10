@@ -20,7 +20,7 @@
             <th>Country</th>
             <th>City</th>
             <th>BuildingNumber</th>
-            
+            <th>Update</th>
         </tr>
     </thead>
     <tbody>
@@ -43,6 +43,14 @@
                         <td>@roomElement.Country</td>
                         <td>@roomElement.City</td>
                         <td>@roomElement.BuildingNumber</td>
+                        @*<button type="button" class="btn btn-warning" @onclick="UpdateRoomNavigate">Update Room</button>
+                        <button type="button" class="btn btn-warning"@onclick="()=> PrzekazDoInnegoWidoku(id)">Przejdź do innego widoku</button>*@
+                        @*<button type="button" class="btn btn-warning" @onclick=href ="/updateroom/@roomElement.Id">Update</button>*@
+                        @*<a href="/updateroom/@roomElement.Id">Edit</a>*@
+                       @* <form action="/updateroom/@roomElement.Id">
+                            <input type="submit" value="Update" />
+                        </form>*@
+                        <a class="btn btn-warning" href="/updateroom/@roomElement.Id">Update</a>
                     </tr>
                 }
             }
@@ -75,6 +83,18 @@
     {
         NavigationManager.NavigateTo("/deleteRoom");
     }
+
+    private void UpdateRoomNavigate()
+    {
+        NavigationManager.NavigateTo("/updateRoom");
+    }
+
+    private void PrzekazDoInnegoWidoku(int parametr)
+    {
+        NavigationManager.NavigateTo($"/updateRoom/{parametr}");
+    }
+   
+ 
 
 
 }

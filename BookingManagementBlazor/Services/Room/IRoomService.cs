@@ -7,5 +7,6 @@ namespace BookingManagementBlazor.Services.Room
         Task<RoomsVm> GetRooms();
         Task<RoomDto> CreateRoom(RoomDto roomDto);
         Task DeleteRoom(int roomId);
+        Task<RoomDto> UpdateRoom(RoomDto roomDto);
     }
 }

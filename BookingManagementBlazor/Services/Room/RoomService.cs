@@ -29,8 +29,13 @@ namespace BookingManagementBlazor.Services.Room
             //await _httpClient.DeleteAsync($"/api/rooms/{roomId}");
             var response = await _httpClient.DeleteFromJsonAsync<int>($"/api/rooms/{roomId}");
         }
+        public async Task<RoomDto> UpdateRoom(RoomDto roomDto)
+        {
+            var response = await _httpClient.PutAsJsonAsync("api/rooms", roomDto);
+            return roomDto;
+        }
 
-        
+
 
 
     }

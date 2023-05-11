@@ -1,13 +1,14 @@
 ﻿@page "/reservations"
 @using BookingManagementBlazor.Models.Reservation;
 @using BookingManagementBlazor.Services.Reservation;
-
+@inject NavigationManager NavigationManager
 @inject IReservationService IReserService
 
 <PageTitle>Reservations</PageTitle>
 
 <h1>Reservation List API</h1>
 
+<button type="button" class="btn btn-success" @onclick="@CreateReservationNavigate">Create Reservation</button>
 
 
 
@@ -56,6 +57,11 @@
     {
         ReservatiuonResponse = await IReserService.GetReservationsBookingAPI();
         reservationsList.Add(ReservatiuonResponse);
+    }
+
+    private void CreateReservationNavigate()
+    {
+        NavigationManager.NavigateTo("/createReservation");
     }
     
 }

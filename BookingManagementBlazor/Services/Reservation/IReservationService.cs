@@ -1,4 +1,5 @@
 ﻿using BookingManagementBlazor.Models.Reservation;
+using BookingManagementBlazor.Models.Room;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookingManagementBlazor.Services.Reservation
@@ -8,5 +9,7 @@ namespace BookingManagementBlazor.Services.Reservation
         Task<List<ReservationTest>> GetReservations();
 
         Task<ReservationsVm> GetReservationsBookingAPI();
+
+        Task<ReservationDto> CreateRerservation(ReservationDto reservationDto);
     }
 }

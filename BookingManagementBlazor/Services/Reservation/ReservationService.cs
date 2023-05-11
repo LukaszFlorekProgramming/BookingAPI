@@ -1,4 +1,5 @@
 ﻿using BookingManagementBlazor.Models.Reservation;
+using BookingManagementBlazor.Models.Room;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookingManagementBlazor.Services.Reservation
@@ -18,6 +19,12 @@ namespace BookingManagementBlazor.Services.Reservation
         public async Task<ReservationsVm> GetReservationsBookingAPI()
         {
             return await _httpClient.GetFromJsonAsync<ReservationsVm>("api/reservations/GetReservations");
+        }
+
+        public async Task<ReservationDto> CreateRerservation(ReservationDto reservationDto)
+        {
+            var response = await _httpClient.PostAsJsonAsync("api/reservations", reservationDto);
+            return reservationDto;
         }
     }
 }

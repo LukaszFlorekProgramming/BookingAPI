@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Booking.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Booking.Persistance.Entities
+namespace Booking.Domain.Entities
 {
     public class Room
     {
@@ -21,5 +22,6 @@ namespace Booking.Persistance.Entities
         public string Country { get; set; }
 
         public ICollection<Reservation> Reservations { get; set; } 
+        public ICollection<Image> Images { get; set; }
     }
 }

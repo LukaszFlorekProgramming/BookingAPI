@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Booking.Application.Interfaces;
-using Booking.Persistance.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;

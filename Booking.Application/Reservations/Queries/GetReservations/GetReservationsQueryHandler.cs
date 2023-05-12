@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Booking.Application.Interfaces;
-using Booking.Persistance.Entities;
+using Booking.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;

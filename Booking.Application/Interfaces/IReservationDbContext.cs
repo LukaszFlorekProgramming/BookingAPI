@@ -1,4 +1,4 @@
-﻿using Booking.Persistance.Entities;
+﻿using Booking.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,6 +12,7 @@ namespace Booking.Application.Interfaces
     {
         DbSet<Reservation> Reservations { get; set; }
         DbSet<Room> Rooms { get; set; }
+        DbSet<Image> Images { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
         
     }

@@ -1,4 +1,5 @@
 using BookingManagementBlazor.Models;
+using BookingManagementBlazor.Services.Image;
 using BookingManagementBlazor.Services.Reservation;
 using BookingManagementBlazor.Services.Room;
 using Microsoft.AspNetCore.Components;
@@ -16,6 +17,11 @@ builder.Services.AddHttpClient<IReservationService, ReservationService>(client =
 });
 builder.Services.AddSingleton<RoomService>();
 builder.Services.AddHttpClient<IRoomService, RoomService>(client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7269/");
+});
+
+builder.Services.AddHttpClient<IImageService, ImageService>(client =>
 {
     client.BaseAddress = new Uri("https://localhost:7269/");
 });

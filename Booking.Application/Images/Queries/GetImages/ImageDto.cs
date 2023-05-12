@@ -7,18 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Booking.Application.Reservations.Queries.GetReservations
+namespace Booking.Application.Images.Queries.GetImages
 {
-    public class ReservationDto : IMapFrom<Reservation>
+    public class ImageDto : IMapFrom<Image>
     {
         public int Id { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public byte[] PhotoResource { get; set; }
         public int? RoomId { get; set; }
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Reservation, ReservationDto>()
+            profile.CreateMap<Image, ImageDto>()
                 .ForMember(d => d.Id, map => map.MapFrom(src => src.Id));
         }
     }

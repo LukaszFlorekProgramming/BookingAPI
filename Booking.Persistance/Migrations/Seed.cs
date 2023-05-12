@@ -1,4 +1,4 @@
-﻿using Booking.Persistance.Entities;
+﻿using Booking.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

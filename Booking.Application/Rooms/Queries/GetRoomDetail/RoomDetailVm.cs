@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Booking.Application.Mappings;
-using Booking.Persistance.Entities;
+using Booking.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

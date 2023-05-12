@@ -1,6 +1,6 @@
 ﻿using Booking.Application.Interfaces;
 using Booking.Domain.Common;
-using Booking.Persistance.Entities;
+using Booking.Domain.Entities;
 using Booking.Persistance.Migrations;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -21,6 +21,7 @@ namespace Booking.Persistance
         }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Room> Rooms { get; set; }
+        public DbSet<Image> Images { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

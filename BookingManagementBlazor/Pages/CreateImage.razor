@@ -16,10 +16,6 @@
     <div class="col-sm-4">
         <EditForm Model="@imageDto" OnSubmit="AddImage">
             
-            <div class="mb-3">
-                <label for="name" class="form-label">Id Room:</label>
-                <InputNumber id="name" @bind-Value="imageDto.RoomId" class="form-control"></InputNumber>
-            </div>
 
             <div class="mb-3">
                 <label for="name" class="form-label">Image:</label>
@@ -37,10 +33,11 @@
 
 
 @code{
+    public int i = 0;
+
     private ImageDto imageDto = new()
     {
         PhotoResource = null,
-        RoomId = 0
     };
 
     protected override async Task OnInitializedAsync()
@@ -50,7 +47,7 @@
 
     private async Task AddImage()
     {
-        if (imageDto.RoomId != 0)
+        if (i != 0)
         {
             imageDto = await IImageService.CreateImage(imageDto);
             NavigationManager.NavigateTo("/images");

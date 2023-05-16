@@ -10,8 +10,6 @@ namespace Booking.Domain.Entities
     {
         public int Id { get; set; }
         public byte[] PhotoResource { get; set; }
-        public int? RoomId { get; set; }
-        public Room Room { get; set; }
-
+        public ICollection<Room> Rooms { get; set; }
     }
 }

@@ -21,7 +21,6 @@ namespace Booking.Application.Images.Commands.CreateImage
             Image image = new()
             {
                 PhotoResource = request.PhotoResource,
-                RoomId = request.RoomId
             };
 
             _context.Images.Add(image);

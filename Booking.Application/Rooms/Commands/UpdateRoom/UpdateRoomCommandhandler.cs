@@ -31,7 +31,9 @@ namespace Booking.Application.Rooms.Commands.UpdateRoom
                 RoomNumber = request.RoomNumber,
                 PostalCode = request.PostalCode,
                 City = request.City,
-                Country = request.Country
+                Country = request.Country,
+                ImageId = request.ImageId
+
             };
 
             _context.Rooms.Update(room);

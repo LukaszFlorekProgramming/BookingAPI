@@ -14,7 +14,6 @@
         <tr>
             <th>Id</th>
             <th>Podgląd Zdjęcia</th>
-            <th>Id Room</th>
             
         </tr>
     </thead>
@@ -33,7 +32,6 @@
                     <tr>
                         <td>@imageElement.Id</td>
                         <td><img src="@($"data:image/png;base64,{Convert.ToBase64String(@imageElement.PhotoResource)}")" alt="Zdjęcie" width="300" height="200" /></td>
-                        <td>@imageElement.RoomId</td>
                     </tr>
                 }
             }

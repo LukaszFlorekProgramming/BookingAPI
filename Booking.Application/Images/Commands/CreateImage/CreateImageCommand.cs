@@ -10,6 +10,5 @@ namespace Booking.Application.Images.Commands.CreateImage
     public class CreateImageCommand : IRequest<int>
     {
         public byte[] PhotoResource { get; set; }
-        public int? RoomId { get; set; }
     }
 }

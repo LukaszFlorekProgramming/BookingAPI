@@ -60,6 +60,10 @@
                 <label for="name" class="form-label">Country:</label>
                 <InputText id="name" @bind-Value="roomDto.Country" class="form-control"></InputText>
             </div>
+            <div class="mb-3">
+                <label for="name" class="form-label">IdImage:</label>
+                <InputNumber id="name" @bind-Value="roomDto.ImageId" class="form-control"></InputNumber>
+            </div>
 
             <button type="submit" class="btn btn-primary">Update</button>
             <button type="button" class="btn btn-secondary" @onclick="@Cancel">Cancel</button>

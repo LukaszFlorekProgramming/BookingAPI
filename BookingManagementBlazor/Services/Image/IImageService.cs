@@ -7,6 +7,8 @@ namespace BookingManagementBlazor.Services.Image
     {
         Task<ImageVm> GetImages();
         Task<ImageDto> CreateImage(ImageDto imageDto);
-        Task DeleteImage(int imageId);
+        //Task DeleteImage(ImageDto imageDto);
+        Task<int> DeleteImage(int id);
+
     }
 }

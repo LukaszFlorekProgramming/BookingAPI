@@ -18,10 +18,16 @@ namespace BookingManagementBlazor.Services.Image
             return imageDto;
         }
 
-        public async Task DeleteImage(int imageId)
+        public async Task<int> DeleteImage(int id)
         {
-            var response = await _httpClient.DeleteFromJsonAsync<int>($"/api/images/{imageId}");
+            //var response = await _httpClient.DeleteFromJsonAsync<int>($"/api/images/{id}");
+            return await _httpClient.DeleteFromJsonAsync<int>($"/api/images/{id}");
         }
+
+        /*public async Task DeleteImage(ImageDto imageDto)
+        {
+            var response = await _httpClient.DeleteFromJsonAsync<int>($"/api/images/{imageDto.Id}");
+        }*/
 
         public async Task<ImageVm> GetImages()
         {

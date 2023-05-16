@@ -1,6 +1,6 @@
 ﻿using Booking.Application.Interfaces;
+using Booking.Domain.Entities;
 using Booking.Persistance;
-using Booking.Persistance.Entities;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using System;
@@ -30,7 +30,7 @@ namespace Application.UnitTests.Common
             var room = new Room() { Id = 4, Capacity = 10, IsBooked = false, Name = "Room4"  };
             context.Rooms.Add(room);
 
-            var reservation = new Booking.Persistance.Entities.Reservation() { Id = 11, RoomId = 4 };
+            var reservation = new Booking.Domain.Entities.Reservation() { Id = 11, RoomId = 4 };
             context.Reservations.Add(reservation);
             
 

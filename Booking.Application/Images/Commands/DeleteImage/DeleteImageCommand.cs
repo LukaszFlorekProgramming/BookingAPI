@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Booking.Application.Images.Commands.DeleteImage
 {
-    public class DeleteImageCommand : IRequest
+    public class DeleteImageCommand : IRequest<int>
     {
         public int Id { get; set; }
     }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Booking.Application.Images.Commands.DeleteImage
 {
-    public class DeleteImageCommandHandler : IRequestHandler<DeleteImageCommand>
+    public class DeleteImageCommandHandler : IRequestHandler<DeleteImageCommand,int>
     {
         private readonly IReservationDbContext _context;
         public DeleteImageCommandHandler(IReservationDbContext reservationDbContext)
@@ -17,11 +17,14 @@ namespace Booking.Application.Images.Commands.DeleteImage
             _context = reservationDbContext;
         }
 
-        public async Task Handle(DeleteImageCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(DeleteImageCommand request, CancellationToken cancellationToken)
         {
             var image = await _context.Images.Where(x => x.Id == request.Id).FirstOrDefaultAsync();
             _context.Images.Remove(image);
             await _context.SaveChangesAsync(cancellationToken);
+            return image.Id;
         }
+
+        
     }
 }

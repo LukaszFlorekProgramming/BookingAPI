@@ -3,11 +3,13 @@ using Booking.Application.Reservations.Commands.DeleteReservation;
 using Booking.Application.Reservations.Commands.UpdateReservation;
 using Booking.Application.Reservations.Queries.GetReservationDetail;
 using Booking.Application.Reservations.Queries.GetReservations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Booking.API.Controllers
 {
     [Route("api/reservations")]
+    [Authorize]
     public class ReservationController : BaseController
     {
         [HttpGet]

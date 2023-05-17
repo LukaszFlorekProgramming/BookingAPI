@@ -14,10 +14,12 @@ namespace Booking.Application.Reservations.Queries.GetReservationDetail
     {
         private readonly IReservationDbContext _context;
         private IMapper _mapper;
-        public GetReservationDetailQueryHandler(IReservationDbContext reservationDbContext, IMapper mapper) 
+        private readonly ICurrentUserService _currentUserService;
+        public GetReservationDetailQueryHandler(IReservationDbContext reservationDbContext, IMapper mapper, ICurrentUserService userService) 
         { 
             _context = reservationDbContext;
             _mapper = mapper;
+            _currentUserService = userService;
         }
         public async Task<ReservationDetailVm> Handle(GetReservationDetailQuery request, CancellationToken cancellationToken)
         {

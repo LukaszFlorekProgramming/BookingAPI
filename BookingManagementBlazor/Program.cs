@@ -13,17 +13,17 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<ReservationService>();
 builder.Services.AddHttpClient<IReservationService, ReservationService>(client =>
 {
-    client.BaseAddress = new Uri("https://localhost:7269/");
+    client.BaseAddress = new Uri("https://localhost:44318/");
 });
 builder.Services.AddSingleton<RoomService>();
 builder.Services.AddHttpClient<IRoomService, RoomService>(client =>
 {
-    client.BaseAddress = new Uri("https://localhost:7269/");
+    client.BaseAddress = new Uri("https://localhost:44318/");
 });
 
 builder.Services.AddHttpClient<IImageService, ImageService>(client =>
 {
-    client.BaseAddress = new Uri("https://localhost:7269/");
+    client.BaseAddress = new Uri("https://localhost:44318/");
 });
 
 var app = builder.Build();

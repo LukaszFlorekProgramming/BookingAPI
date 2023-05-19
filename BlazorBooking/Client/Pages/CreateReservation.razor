@@ -1,0 +1,71 @@
+﻿@page "/createReservation"
+@using BlazorBooking.Client.Services.Reservation;
+@using BlazorBooking.Shared.Models.Reservation;
+
+@inject NavigationManager NavigationManager
+@inject IReservationService IReservationService
+
+<PageTitle>Create Reservation</PageTitle>
+
+<h3>Create Reservation</h3>
+
+
+<div class="row">
+    <div class="col-sm-4">
+        <EditForm Model="@reservationDto" OnSubmit="AddReservation">
+
+            <div class="mb-3">
+                <label for="StartDate" class="form-label">Start Date:</label>
+                <InputDate id="StartDate" @bind-Value="reservationDto.StartDate" class="form-control"></InputDate>
+
+            </div>
+
+            <div class="mb-3">
+                <label for="EndDate" class="form-label">End Date:</label>
+                <InputDate id="EndDate" @bind-Value="reservationDto.EndDate" class="form-control"></InputDate>
+                @*<input type="datetime-local" @bind-value="@reservationDto.EndDate" />*@
+            </div>
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Room Id:</label>
+                <InputNumber id="name" @bind-Value="reservationDto.RoomId" class="form-control"></InputNumber>
+            </div>
+
+
+
+
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary" @onclick="@Cancel">Cancel</button>
+        </EditForm>
+    </div>
+</div>
+
+
+@code {
+    private ReservationDto reservationDto = new()
+        {
+            StartDate = DateTime.Now,
+            EndDate = DateTime.Today.AddDays(1),
+            RoomId = 0
+        };
+
+    protected override async Task OnInitializedAsync()
+    {
+        await AddReservation();
+    }
+
+    private async Task AddReservation()
+    {
+        if (reservationDto.RoomId != 0)
+        {
+            reservationDto = await IReservationService.CreateRerservation(reservationDto);
+            NavigationManager.NavigateTo("/reservations");
+        }
+    }
+
+
+    private void Cancel()
+    {
+        NavigationManager.NavigateTo("/reservations");
+    }
+}

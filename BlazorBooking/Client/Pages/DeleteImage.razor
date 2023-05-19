@@ -1,0 +1,58 @@
+﻿@page "/deleteImage"
+@using BlazorBooking.Client.Services.Image;
+@using BlazorBooking.Shared.Models.Image;
+
+@inject NavigationManager NavigationManager
+@inject IImageService IImageService
+
+<PageTitle>Delete Image</PageTitle>
+
+<h3>Delete Image</h3>
+
+<div class="row">
+    <div class="col-sm-4">
+        <EditForm Model="@imageDto" OnSubmit="DeleteImg">
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Id Img:</label>
+                <InputNumber id="name" @bind-Value="imageDto.Id" class="form-control"></InputNumber>
+            </div>
+
+
+
+
+
+
+            <button type="submit" class="btn btn-primary">Delete</button>
+            <button type="button" class="btn btn-secondary" @onclick="@Cancel">Cancel</button>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private ImageDto imageDto = new()
+        {
+            Id = 0,
+            PhotoResource = null,
+        };
+
+    protected override async Task OnInitializedAsync()
+    {
+        await DeleteImg();
+    }
+
+    private async Task DeleteImg()
+    {
+        if (imageDto.Id != 0)
+        {
+            await IImageService.DeleteImage(imageDto.Id);
+            NavigationManager.NavigateTo("/images");
+        }
+    }
+
+
+    private void Cancel()
+    {
+        NavigationManager.NavigateTo("/images");
+    }
+}

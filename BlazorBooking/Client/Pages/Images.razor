@@ -1,0 +1,70 @@
+﻿@page "/images"
+@using BlazorBooking.Client.Services.Image;
+@using BlazorBooking.Shared.Models.Image;
+@using Microsoft.AspNetCore.Authorization;
+@inject NavigationManager NavigationManager
+@inject IImageService IImageService
+@attribute [Authorize]
+
+<PageTitle>Images</PageTitle>
+
+<button type="button" class="btn btn-success" @onclick="@AddImageNavigate">Add Image</button>
+<button type="button" class="btn btn-danger" @onclick="@DeleteRoomNavigate">Delete Room</button>
+
+<table class="table table-striped table-bordered bg-light">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Podgląd Zdjęcia</th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @if (ImageResponse.Images == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            @foreach (var image in imagesList)
+            {
+                @foreach (var imageElement in image.Images)
+                {
+                    <tr>
+                        <td>@imageElement.Id</td>
+                        <td><img src="@($"data:image/png;base64,{Convert.ToBase64String(@imageElement.PhotoResource)}")" alt="Zdjęcie" width="300" height="200" /></td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>
+
+
+
+@code {
+    public ImageVm ImageResponse = new ImageVm();
+    public List<ImageVm> imagesList = new List<ImageVm>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetImages();
+    }
+    private async Task GetImages()
+    {
+        ImageResponse = await IImageService.GetImages();
+        imagesList.Add(ImageResponse);
+    }
+    private void AddImageNavigate()
+    {
+        NavigationManager.NavigateTo("/addimage");
+    }
+    private void DeleteRoomNavigate()
+    {
+        NavigationManager.NavigateTo("/deleteImage");
+    }
+
+
+
+}

@@ -17,10 +17,10 @@
         <EditForm Model="@imageDto" OnSubmit="AddImage">
 
 
-            <div class="mb-3">
+            @*<div class="mb-3">
                 <label for="name" class="form-label">Image:</label>
                 <InputFile id="name" @bind-Value="imageDto.PhotoResource" OnChange="OnInputFileChange" class="form-control"></InputFile>
-            </div>
+            </div>*@
 
 
             <button type="submit" class="btn btn-primary">Save</button>
@@ -37,7 +37,7 @@
 
     private ImageDto imageDto = new()
         {
-            PhotoResource = null,
+            PhotoResource = null
         };
 
     protected override async Task OnInitializedAsync()

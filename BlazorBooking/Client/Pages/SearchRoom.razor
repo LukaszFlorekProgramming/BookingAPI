@@ -75,15 +75,23 @@
         City.Clear();
         RoomResponse = await IRoomService.GetRooms();
         Rooms = RoomResponse.Rooms.ToList();
-        Pokoje = Rooms.Where(cos => cos.City == miasto).ToList();
+        Pokoje = Rooms.Where(x => x.City == miasto).ToList();
         AddCityToList();
     }
     public void AddCityToList()
     {
+
         foreach (var element in Rooms)
         {
-            string miasto = element.City;
-            City.Add(miasto);
+            if (City.Contains(element.City))
+            {
+
+            }else
+            {
+                string miasto = element.City;
+                City.Add(miasto);
+            }
+            
         }
     }
     private void Cancel()

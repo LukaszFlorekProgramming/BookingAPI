@@ -10,8 +10,7 @@
 <PageTitle>Rooms</PageTitle>
 
 <h1>Room List</h1>
-<button type="button" class="btn btn-success" @onclick="@AddRoomNavigate">Add Room</button>
-<button type="button" class="btn btn-danger" @onclick="@DeleteRoomNavigate">Delete Room</button>
+
 
 <table class="table table-striped table-bordered bg-light">
     <thead>
@@ -48,7 +47,6 @@
                         <td>@roomElement.City</td>
                         <td>@roomElement.BuildingNumber</td>
                         <td>@roomElement.ImageId</td>
-                        <td><a class="btn btn-warning" href="/updateroom/@roomElement.Id">Update</a></td>
                     </tr>
                 }
             }
@@ -79,23 +77,5 @@
     private void Cancel()
     {
         NavigationManager.NavigateTo("/rooms");
-    }
-    private void AddRoomNavigate()
-    {
-        NavigationManager.NavigateTo("/addRoom");
-    }
-    private void DeleteRoomNavigate()
-    {
-        NavigationManager.NavigateTo("/deleteRoom");
-    }
-
-    private void UpdateRoomNavigate()
-    {
-        NavigationManager.NavigateTo("/updateRoom");
-    }
-
-    private void PrzekazDoInnegoWidoku(int parametr)
-    {
-        NavigationManager.NavigateTo($"/updateRoom/{parametr}");
     }
 }

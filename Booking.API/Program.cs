@@ -7,6 +7,8 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+
 builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
 
 builder.Services.AddDbContext<ReservationDbContext>(option =>
@@ -20,6 +22,28 @@ builder.Services.AddApplication();
 builder.Services.AddPersistance();
 builder.Services.AddInfrastructure();
 builder.Services.AddControllers();
+
+/*builder.Services.AddCors(options =>
+options.AddPolicy(name: "MyAllowOrigins",
+builder =>
+{
+builder.AllowAnyOrigin();
+}));*/
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.WithOrigins("https://localhost:7096")
+               .AllowAnyHeader()
+               .AllowAnyMethod();
+    });
+});
+
+//options.AddPolicy("AllowAll", policy => policy.AllowAnyOrigin());
+
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -35,6 +59,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseSerilogRequestLogging();
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthorization();
 

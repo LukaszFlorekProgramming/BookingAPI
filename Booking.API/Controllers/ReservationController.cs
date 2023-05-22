@@ -3,6 +3,7 @@ using Booking.Application.Reservations.Commands.DeleteReservation;
 using Booking.Application.Reservations.Commands.UpdateReservation;
 using Booking.Application.Reservations.Queries.GetReservationDetail;
 using Booking.Application.Reservations.Queries.GetReservations;
+using Booking.Application.Rooms.Commands.DeleteRoom;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Booking.API.Controllers
@@ -40,6 +41,12 @@ namespace Booking.API.Controllers
         public async Task<IActionResult> DeleteReservation(DeleteReservationCommand command)
         {
             await Mediator.Send(command);
+            return Ok();
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteReservationByID(int id)
+        {
+            await Mediator.Send(new DeleteReservationCommand() { ReservationId = id});
             return Ok();
         }
 

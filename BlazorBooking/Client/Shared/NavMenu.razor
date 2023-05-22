@@ -1,6 +1,6 @@
 ﻿<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">BlazorBooking</a>
+        <a class="navbar-brand" href="">Booking</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -15,8 +15,13 @@
             </NavLink>
         </div>
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="rooms">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Rooms
+            <NavLink class="nav-link" href="searchrooms">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Search Room
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="myreservations">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> My Reservations
             </NavLink>
         </div>
         <div class="nav-item px-3">
@@ -25,18 +30,13 @@
             </NavLink>
         </div>
         <div class="nav-item px-3">
+            <NavLink class="nav-link" href="rooms">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Rooms
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
             <NavLink class="nav-link" href="images">
                 <span class="oi oi-list-rich" aria-hidden="true"></span> Images
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="searchrooms">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Search Room
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="myreservations">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> My Reservations
             </NavLink>
         </div>
     </nav>

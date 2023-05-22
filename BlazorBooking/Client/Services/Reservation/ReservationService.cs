@@ -17,6 +17,11 @@ namespace BlazorBooking.Client.Services.Reservation
             return reservationDto;
         }
 
+        public async Task DeleteReservation(int id)
+        {
+            var response = await _httpClient.DeleteAsync($"/api/reservations/{id}");
+        }
+
         public async Task<ReservationsVm> GetReservations()
         {
             return await _httpClient.GetFromJsonAsync<ReservationsVm>("api/reservations/GetReservations");

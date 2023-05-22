@@ -63,7 +63,7 @@
     public List<RoomsVm> roomsList = new List<RoomsVm>();
     public List<RoomDto> Rooms = new List<RoomDto>();
     public List<RoomDto> Pokoje = new List<RoomDto>();
-    public string miasto = "Lublin";
+    public string miasto = "";
     public List<string> City = new List<string>();
     protected override async Task OnInitializedAsync()
     {
@@ -79,13 +79,15 @@
     }
     public void AddCityToList()
     {
+        City.Add(miasto);
 
         foreach (var element in Rooms)
         {
             if (City.Contains(element.City))
             {
 
-            }else
+            }
+            else
             {
                 string miasto = element.City;
                 City.Add(miasto);

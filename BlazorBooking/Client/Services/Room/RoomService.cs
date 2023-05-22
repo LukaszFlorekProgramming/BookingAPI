@@ -33,5 +33,10 @@ namespace BlazorBooking.Client.Services.Room
             var response = await _httpClient.PutAsJsonAsync("api/rooms", roomDto);
             return roomDto;
         }
+
+        public async Task<RoomDto> GetRoomDetails(int id)
+        {
+            return await _httpClient.GetFromJsonAsync<RoomDto>($"api/rooms/{id}");
+        }
     }
 }

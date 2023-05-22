@@ -1,23 +1,18 @@
-﻿@page "/updateroom/{id2:int}"
+﻿@page "/updateroom/{id:int}"
 @using BlazorBooking.Client.Services.Room;
 @using BlazorBooking.Shared.Models.Room;
 
 @inject NavigationManager NavigationManager
 @inject IRoomService IRoomService
 
-<PageTitle>New Room</PageTitle>
+<PageTitle>Update Room</PageTitle>
 
-<h3>New Room</h3>
+<h3>Update Room</h3>
 
 <div class="row">
     <div class="col-sm-4">
         <EditForm Model="@roomDto" OnSubmit="RoomUpdate">
-            @roomDto.Id = @Id2
-            <div class="mb-3">
-                <label for="name" class="form-label">Id:</label>
-                <InputNumber id="name" @bind-Value="roomDto.Id" class="form-control"></InputNumber>
-            </div>
-
+          
             <div class="mb-3">
                 <label for="name" class="form-label">Name:</label>
                 <InputText id="name" @bind-Value="roomDto.Name" class="form-control"></InputText>
@@ -74,11 +69,10 @@
 
 @code {
     [Parameter]
-    public int Id2 { get; set; }
+    public int Id { get; set; }
 
-
-    private RoomDto roomDto = new()
-        {
+    private RoomDto roomDto = new() 
+    {
             Id = 1,
             Name = string.Empty,
             Capacity = 0,
@@ -92,12 +86,12 @@
             Country = string.Empty
         };
 
-
-
     protected override async Task OnInitializedAsync()
     {
         await RoomUpdate();
+        roomDto.Id = Id;
     }
+
 
     private async Task RoomUpdate()
     {
@@ -106,9 +100,18 @@
             roomDto = await IRoomService.UpdateRoom(roomDto);
             NavigationManager.NavigateTo("/rooms");
         }
+        else
+        {
+            var result = await IRoomService.GetRoomDetails((int)Id);
+            roomDto = result;
+        }
     }
     private void Cancel()
     {
         NavigationManager.NavigateTo("/rooms");
+    }
+    public void change()
+    {
+        roomDto.Id = Id;
     }
 }

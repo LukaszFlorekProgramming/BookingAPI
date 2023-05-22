@@ -1,4 +1,4 @@
-﻿@page "/reservations"
+﻿@page "/myreservations"
 @using BlazorBooking.Client.Services.Reservation;
 @using BlazorBooking.Shared.Models.Reservation;
 @using Microsoft.AspNetCore.Authorization;
@@ -6,11 +6,9 @@
 @inject IReservationService IReserService
 @attribute [Authorize]
 
-<PageTitle>Reservations</PageTitle>
+<PageTitle>My Reservations</PageTitle>
 
-<h1>Reservation List API</h1>
-
-<button type="button" class="btn btn-success" @onclick="@CreateReservationNavigate">Create Reservation</button>
+<h1>My Reservations</h1>
 
 <table class="table table-striped table-bordered bg-light">
     <thead>
@@ -58,9 +56,5 @@
     {
         ReservatiuonResponse = await IReserService.GetReservations();
         reservationsList.Add(ReservatiuonResponse);
-    }
-    private void CreateReservationNavigate()
-    {
-        NavigationManager.NavigateTo("/createReservation");
     }
 }

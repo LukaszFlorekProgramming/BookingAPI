@@ -59,7 +59,7 @@ namespace Booking.Persistance.Migrations
                 );
             });
 
-            modelBuilder.Entity<Reservation>().HasData(
+            /*modelBuilder.Entity<Reservation>().HasData(
                 new Reservation()
                 {
                     Id = 1,
@@ -79,7 +79,7 @@ namespace Booking.Persistance.Migrations
                     StartDate = DateTime.Now,
                     EndDate = DateTime.Now,
                 }
-                );
+                );*/
         }
     }
 }

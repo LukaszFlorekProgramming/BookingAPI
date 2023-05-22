@@ -23,7 +23,9 @@ namespace Booking.Application.Reservations.Commands.CreateReservation
             {
                 RoomId = request.RoomId,
                 StartDate = request.StartDate,
-                EndDate = request.EndDate
+                EndDate = request.EndDate,
+                UserName = request.UserName
+                
             };
 
             _context.Reservations.Add(reservation);

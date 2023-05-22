@@ -4,6 +4,7 @@
 
 @inject NavigationManager NavigationManager
 @inject IReservationService IReservationService
+@inject AuthenticationStateProvider authenticationStateProvider
 
 <PageTitle>Create Reservation</PageTitle>
 
@@ -26,6 +27,8 @@
                 <label for="name" class="form-label">Room Id:</label>
                 <InputNumber id="name" @bind-Value="reservationDto.RoomId" class="form-control"></InputNumber>
             </div>
+            
+
             <button type="submit" class="btn btn-primary">Save</button>
             <button type="button" class="btn btn-secondary" @onclick="@Cancel">Cancel</button>
         </EditForm>
@@ -35,19 +38,24 @@
 
 @code {
     private ReservationDto reservationDto = new()
-    {
+        {
             StartDate = DateTime.Now,
             EndDate = DateTime.Today.AddDays(1),
-            RoomId = 0
+            RoomId = 0,
+            UserName = string.Empty
     };
 
     protected override async Task OnInitializedAsync()
     {
-        await AddReservation();
+            await AddReservation();
     }
 
     private async Task AddReservation()
     {
+        var authenticationState = await authenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authenticationState.User;
+        reservationDto.UserName = user.Identity.Name;
+
         if (reservationDto.RoomId != 0)
         {
             reservationDto = await IReservationService.CreateRerservation(reservationDto);

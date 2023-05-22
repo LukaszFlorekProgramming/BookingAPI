@@ -25,7 +25,8 @@ namespace Booking.Application.Reservations.Commands.UpdateReservation
                 Id = request.Id,
                 RoomId = request.RoomId,
                 StartDate = request.StartDate,
-                EndDate = request.EndDate   
+                EndDate = request.EndDate,
+                UserName = request.UserName
             };
 
             _context.Reservations.Update(reservation);

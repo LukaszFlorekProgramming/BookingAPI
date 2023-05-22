@@ -1,4 +1,4 @@
-﻿@page "/createReservation"
+﻿@page "/createReservation/{id:int}"
 @using BlazorBooking.Client.Services.Reservation;
 @using BlazorBooking.Shared.Models.Reservation;
 
@@ -23,11 +23,6 @@
                 <label for="EndDate" class="form-label">End Date:</label>
                 <InputDate id="EndDate" @bind-Value="reservationDto.EndDate" class="form-control"></InputDate>
             </div>
-            <div class="mb-3">
-                <label for="name" class="form-label">Room Id:</label>
-                <InputNumber id="name" @bind-Value="reservationDto.RoomId" class="form-control"></InputNumber>
-            </div>
-            
 
             <button type="submit" class="btn btn-primary">Save</button>
             <button type="button" class="btn btn-secondary" @onclick="@Cancel">Cancel</button>
@@ -37,6 +32,9 @@
 
 
 @code {
+    [Parameter]
+    public int Id { get; set; }
+
     private ReservationDto reservationDto = new()
         {
             StartDate = DateTime.Now,
@@ -47,7 +45,8 @@
 
     protected override async Task OnInitializedAsync()
     {
-            await AddReservation();
+        await AddReservation();
+        reservationDto.RoomId = Id;
     }
 
     private async Task AddReservation()
@@ -59,7 +58,7 @@
         if (reservationDto.RoomId != 0)
         {
             reservationDto = await IReservationService.CreateRerservation(reservationDto);
-            NavigationManager.NavigateTo("/reservations");
+            NavigationManager.NavigateTo("/myreservations");
         }
     }
 

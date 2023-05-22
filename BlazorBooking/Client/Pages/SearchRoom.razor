@@ -17,7 +17,8 @@
         }
     </select>
 </div>
-
+@if (miasto != string.Empty)
+{
 <table class="table table-striped table-bordered bg-light">
     <thead>
         <tr>
@@ -29,16 +30,11 @@
             <th>City</th>
             <th>BuildingNumber</th>
             <th>IdImage</th>
+            <th>See availability</th>
         </tr>
     </thead>
     <tbody>
 
-        @if (RoomResponse.Rooms == null)
-        {
-            <p><em>Loading...</em></p>
-        }
-        else
-        {
             @foreach (var roomElement in Pokoje)
             {
                 <tr>
@@ -50,20 +46,22 @@
                     <td>@roomElement.City</td>
                     <td>@roomElement.BuildingNumber</td>
                     <td>@roomElement.ImageId</td>
+                    <td><a class="btn btn-primary" href="/createReservation/@roomElement.Id">Check</a></td>
                 </tr>
             }
-        }
     </tbody>
     <button type="button" class="btn btn-info" @onclick="@GetRooms">Filtruj pokoje</button>
 </table>
+}
 
 @code {
+
 
     public RoomsVm RoomResponse = new RoomsVm();
     public List<RoomsVm> roomsList = new List<RoomsVm>();
     public List<RoomDto> Rooms = new List<RoomDto>();
     public List<RoomDto> Pokoje = new List<RoomDto>();
-    public string miasto = "";
+    public string miasto = string.Empty;
     public List<string> City = new List<string>();
     protected override async Task OnInitializedAsync()
     {

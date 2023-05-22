@@ -16,9 +16,9 @@ namespace BlazorBooking.Client.Services.Image
             return imageDto;
         }
 
-        public async Task<int> DeleteImage(int id)
+        public async Task DeleteImage(int id)
         {
-            return await _httpClient.DeleteFromJsonAsync<int>($"/api/images/{id}");
+            var response = await _httpClient.DeleteAsync($"/api/images/{id}");
         }
 
 

@@ -1,6 +1,7 @@
 ﻿@page "/deleteImage"
 @using BlazorBooking.Client.Services.Image;
 @using BlazorBooking.Shared.Models.Image;
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
 @inject NavigationManager NavigationManager
 @inject IImageService IImageService
@@ -9,7 +10,7 @@
 
 <h3>Delete Image</h3>
 
-<div class="row">
+@*<div class="row">
     <div class="col-sm-4">
         <EditForm Model="@imageDto" OnSubmit="DeleteImg">
 
@@ -19,38 +20,73 @@
             </div>
 
 
-
-
-
-
             <button type="submit" class="btn btn-primary">Delete</button>
             <button type="button" class="btn btn-secondary" @onclick="@Cancel">Cancel</button>
         </EditForm>
     </div>
-</div>
+</div>*@
+
+<table class="table table-striped table-bordered bg-light">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Podgląd Zdjęcia</th>
+            <th>Delete</th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @if (ImageResponse.Images == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            @foreach (var image in imagesList)
+            {
+                @foreach (var imageElement in image.Images)
+                {
+                    <tr>
+                        <td>@imageElement.Id</td>
+                        <td><img src="@($"data:image/png;base64,{Convert.ToBase64String(@imageElement.PhotoResource)}")" alt="Zdjęcie" width="300" height="200" /></td>
+                        <td>
+                            <button type="button" class="btn btn-danger" @onclick="@(() => @DeleteImg(@imageElement.Id) )">Delete</button>
+
+                            <button type="button" class="btn btn-secondary" @onclick="@Cancel">Cancel</button>
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>
 
 @code {
-    private ImageDto imageDto = new()
-        {
-            Id = 0,
-            PhotoResource = null,
-        };
+    public ImageVm ImageResponse = new ImageVm();
+    public List<ImageVm> imagesList = new List<ImageVm>();
 
     protected override async Task OnInitializedAsync()
     {
-        await DeleteImg();
-    }
-
-    private async Task DeleteImg()
-    {
-        if (imageDto.Id != 0)
+        try
         {
-            await IImageService.DeleteImage(imageDto.Id);
-            NavigationManager.NavigateTo("/images");
+            await GetImages();
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
         }
     }
-
-
+    private async Task GetImages()
+    {
+        ImageResponse = await IImageService.GetImages();
+        imagesList.Add(ImageResponse);
+    }
+    private async Task DeleteImg(int id)
+    {
+        await IImageService.DeleteImage(id);
+        NavigationManager.NavigateTo("/images");
+    }
     private void Cancel()
     {
         NavigationManager.NavigateTo("/images");

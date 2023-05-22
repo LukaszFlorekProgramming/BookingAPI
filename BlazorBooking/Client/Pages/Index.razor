@@ -1,4 +1,6 @@
 ﻿@page "/"
+@inject AuthenticationStateProvider authenticationStateProvider
+
 
 <PageTitle>Index</PageTitle>
 
@@ -6,6 +8,21 @@
 
 Welcome to Booking app.
 
+<p>Nazwa zalogowanego użytkownika: @userName</p>
+<p>Id urzytkownika </p>
+
 <SurveyPrompt Title="How is Blazor working for you?" />
 
+@code {
+    private string userName="nie zalogowany";
+    private string userId = "empty";
 
+    protected override async Task OnInitializedAsync()
+    {
+        var authenticationState = await authenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authenticationState.User;
+
+        userName = user.Identity.Name;
+        userId = user.Identity.Name
+    }
+}

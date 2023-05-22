@@ -25,7 +25,8 @@ namespace BlazorBooking.Client.Services.Room
         public async Task DeleteRoom(int roomId)
         {
             //await _httpClient.DeleteAsync($"/api/rooms/{roomId}");
-            var response = await _httpClient.DeleteFromJsonAsync<int>($"/api/rooms/{roomId}");
+            //var response = await _httpClient.DeleteFromJsonAsync<int>($"/api/rooms/{roomId}");
+            var response = await _httpClient.DeleteAsync($"/api/rooms/{roomId}");
         }
         public async Task<RoomDto> UpdateRoom(RoomDto roomDto)
         {

@@ -1,6 +1,7 @@
 ﻿@page "/deleteRoom"
 @using BlazorBooking.Client.Services.Room;
 @using BlazorBooking.Shared.Models.Room;
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
 @inject NavigationManager NavigationManager
 @inject IRoomService IRoomService
@@ -15,8 +16,7 @@
             <th>Price Per Night</th>
             <th>Country</th>
             <th>City</th>
-            <th>Building Number</th>
-            <th></th>
+            <th>Delete</th>
 
         </tr>
     </thead>
@@ -28,10 +28,8 @@
         }
         else
         {
-            @foreach (var room in roomsList)
+            @foreach (var roomElement in Pokoje)
             {
-                @foreach (var roomElement in room.Rooms)
-                {
                     <tr>
 
                         <td>@roomElement.Id</td>
@@ -41,12 +39,11 @@
                         <td>@roomElement.Country</td>
                         <td>@roomElement.City</td>
                         <td>
-                            <button type="button" class="btn btn-danger" @onclick="@(() => @Delete(@roomElement.Id))">Delete</button>
+                            <button type="button" class="btn btn-danger" @onclick="@(() => @Delete(@roomElement.Id) )">Delete</button>
 
                             <button type="button" class="btn btn-secondary" @onclick="@Cancel">Cancel</button>
                         </td>
                     </tr>
-                }
             }
         }
     </tbody>
@@ -56,21 +53,31 @@
 @code {
     public RoomsVm RoomResponse = new RoomsVm();
     public List<RoomsVm> roomsList = new List<RoomsVm>();
-    public int test = 24;
+
+    public List<RoomDto> Pokoje = new List<RoomDto>();
     protected override async Task OnInitializedAsync()
     {
-        await GetRooms();
+        try
+        {
+            await GetRooms();
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
     }
 
     private async Task GetRooms()
     {
         RoomResponse = await IRoomService.GetRooms();
         roomsList.Add(RoomResponse);
+        Pokoje = RoomResponse.Rooms.ToList();
     }
 
     private async Task<int> Delete(int id)
     {
         await IRoomService.DeleteRoom(id);
+        NavigationManager.NavigateTo("/rooms");
         return id;
     }
 

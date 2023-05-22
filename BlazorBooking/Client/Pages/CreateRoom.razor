@@ -68,18 +68,15 @@
                     <tr>
                         <th>Id</th>
                         <th>Podgląd Zdjęcia</th>
-
                     </tr>
                 </thead>
                 <tbody>
-
                     @if (ImagesWhere == null)
                     {
                         <p><em>Loading...</em></p>
                     }
                     else
                     {
-
                         @foreach (var imageElement in ImagesWhere)
                         {
 
@@ -88,14 +85,9 @@
                                 <td @onclick="() => IdImageSet(imageElement.Id)"><img src=" @($"data:image /png;base64,{Convert.ToBase64String(@imageElement.PhotoResource)}")" alt="Zdjęcie" width="300" height="200" /></td>
                             </tr>
                         }
-
                     }
                 </tbody>
             </table>
-
-
-
-
 
             <button type="submit" class="btn btn-primary">Save</button>
             <button type="button" class="btn btn-secondary" @onclick="@Cancel">Cancel</button>
@@ -109,10 +101,8 @@
     public List<ImageDto> Images = new List<ImageDto>();
     public List<ImageDto> ImagesWhere = new List<ImageDto>();
     public List<byte[]> ImagesResourse = new List<byte[]>();
-    //public byte[] imageByte = new byte[] { 10 };
-
     private RoomDto roomDto = new()
-        {
+    {
             Name = string.Empty,
             Capacity = 0,
             IsBooked = false,
@@ -124,7 +114,7 @@
             City = string.Empty,
             Country = string.Empty,
             ImageId = 0
-        };
+    };
 
     protected override async Task OnInitializedAsync()
     {

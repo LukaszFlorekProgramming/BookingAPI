@@ -17,7 +17,6 @@
             <th>Country</th>
             <th>City</th>
             <th>Delete</th>
-
         </tr>
     </thead>
     <tbody>
@@ -40,7 +39,6 @@
                         <td>@roomElement.City</td>
                         <td>
                             <button type="button" class="btn btn-danger" @onclick="@(() => @Delete(@roomElement.Id) )">Delete</button>
-
                             <button type="button" class="btn btn-secondary" @onclick="@Cancel">Cancel</button>
                         </td>
                     </tr>

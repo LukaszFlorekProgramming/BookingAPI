@@ -1,9 +1,12 @@
 ﻿@page "/createReservation/{id:int}"
 @using BlazorBooking.Client.Services.Reservation;
+@using BlazorBooking.Client.Services.Room;
 @using BlazorBooking.Shared.Models.Reservation;
+@using BlazorBooking.Shared.Models.Room;
 
 @inject NavigationManager NavigationManager
 @inject IReservationService IReservationService
+@inject IRoomService IRoomService
 @inject AuthenticationStateProvider authenticationStateProvider
 
 <PageTitle>Create Reservation</PageTitle>
@@ -14,7 +17,9 @@
 <div class="row">
     <div class="col-sm-4">
         <EditForm Model="@reservationDto" OnSubmit="AddReservation">
-
+            <div class="mb-3">
+                RoomName: @roomName
+            </div>
             <div class="mb-3">
                 <label for="StartDate" class="form-label">Start Date:</label>
                 <InputDate id="StartDate" @bind-Value="reservationDto.StartDate" class="form-control"></InputDate>
@@ -24,7 +29,7 @@
                 <InputDate id="EndDate" @bind-Value="reservationDto.EndDate" class="form-control"></InputDate>
             </div>
 
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary">Confirm</button>
             <button type="button" class="btn btn-secondary" @onclick="@Cancel">Cancel</button>
         </EditForm>
     </div>
@@ -34,6 +39,7 @@
 @code {
     [Parameter]
     public int Id { get; set; }
+    public string roomName = String.Empty;
 
     private ReservationDto reservationDto = new()
         {
@@ -47,6 +53,7 @@
     {
         await AddReservation();
         reservationDto.RoomId = Id;
+        roomName = await IReservationService.GetRoomName(Id);
     }
 
     private async Task AddReservation()

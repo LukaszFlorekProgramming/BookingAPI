@@ -9,5 +9,6 @@ namespace BlazorBooking.Client.Services.Reservation
 
         Task<ReservationDto> CreateRerservation(ReservationDto reservationDto);
         Task DeleteReservation(int id);
+        Task<string> GetRoomName(int idRoom);
     }
 }

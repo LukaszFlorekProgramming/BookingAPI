@@ -16,6 +16,7 @@
             <option>@element</option>
         }
     </select>
+    <div><button type="button" class="btn btn-info" @onclick="@GetRooms">Filtruj pokoje</button></div>
 </div>
 @if (miasto != string.Empty)
 {
@@ -50,7 +51,6 @@
                 </tr>
             }
     </tbody>
-    <button type="button" class="btn btn-info" @onclick="@GetRooms">Filtruj pokoje</button>
 </table>
 }
 

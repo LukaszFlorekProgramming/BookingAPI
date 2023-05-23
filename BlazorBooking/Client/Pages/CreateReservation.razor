@@ -42,15 +42,12 @@
     </div>
 </div>
 
-
 @code {
     [Parameter]
     public int Id { get; set; }
     public string roomName = String.Empty;
     public byte[] Photo = new byte[0];
     int x = 0;
-
-
     private ReservationDto reservationDto = new()
         {
             StartDate = DateTime.Now,
@@ -58,7 +55,6 @@
             RoomId = 0,
             UserName = string.Empty
     };
-
     protected override async Task OnInitializedAsync()
     {
         await AddReservation();

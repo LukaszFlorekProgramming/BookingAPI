@@ -1,4 +1,5 @@
 ﻿using BlazorBooking.Shared.Models.Reservation;
+using BlazorBooking.Shared.Models.Room;
 
 namespace BlazorBooking.Client.Services.Reservation
 {
@@ -9,6 +10,7 @@ namespace BlazorBooking.Client.Services.Reservation
 
         Task<ReservationDto> CreateRerservation(ReservationDto reservationDto);
         Task DeleteReservation(int id);
-        Task<string> GetRoomName(int idRoom);
+        Task<RoomDto> GetRoom(int idRoom);
+        Task<byte[]> GetResourseImage(int idImage);
     }
 }

@@ -1,4 +1,5 @@
-﻿using BlazorBooking.Shared.Models.Reservation;
+﻿using BlazorBooking.Shared.Models.Image;
+using BlazorBooking.Shared.Models.Reservation;
 using BlazorBooking.Shared.Models.Room;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -29,10 +30,16 @@ namespace BlazorBooking.Client.Services.Reservation
             return await _httpClient.GetFromJsonAsync<ReservationsVm>("api/reservations/GetReservations");
         }
 
-        public async Task<string> GetRoomName(int idRoom)
+        public async Task<byte[]> GetResourseImage(int idImage)
+        {
+            var image = await _httpClient.GetFromJsonAsync<ImageDto>($"api/images/{idImage}");
+            return image.PhotoResource;
+        }
+
+        public async Task<RoomDto> GetRoom(int idRoom)
         {
             var room = await _httpClient.GetFromJsonAsync<RoomDto>($"api/rooms/{idRoom}");
-            return room.Name;
+            return room;
 
         }
     }

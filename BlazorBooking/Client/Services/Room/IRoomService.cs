@@ -10,5 +10,6 @@ namespace BlazorBooking.Client.Services.Room
         Task DeleteRoom(int roomId);
         Task<RoomDto> UpdateRoom(RoomDto roomDto);
         Task<RoomDto> GetRoomDetails(int id);
+        Task<byte[]> GetResourseImage(int idImage);
     }
 }

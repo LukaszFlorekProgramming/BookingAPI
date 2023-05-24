@@ -24,7 +24,6 @@ The application design uses the Onion architecture.The Onion architecture is bas
 
 
 
-
           
 Main purpose of the app
 -------------
@@ -36,6 +35,9 @@ It's time to quickly talk about the application.
 
 ### Main layout
 The front-end of my app is based on Blazor.
+
+![image](https://github.com/LukaszFlorekProgramming/BookingAPI/assets/56117955/7dfa1ad5-7ff4-4f9b-b89c-af629853a51f)
+
 Let's start with searching for an interesting apartment.
 
 ### Search Reservation
@@ -49,7 +51,7 @@ The app will then ask you to enter the start and end dates for your booking. Unf
 ![image](https://github.com/LukaszFlorekProgramming/BookingAPI/assets/56117955/3c3d82fc-91bb-4950-8f4d-e47886750d53)
 
 ### My Reservation
-If all entered data is verified, the application will create a new reservation and redirect you to the My reservations subpage.
+If all entered data is verified, the application will create a new reservation and redirect you to the My reservations subpage. Reservations related to the logged in account will appear on the subpage.
 
 ![image](https://github.com/LukaszFlorekProgramming/BookingAPI/assets/56117955/d599bbdc-e7bc-4ef0-916e-ca45a26c9ebc)
 
@@ -83,6 +85,13 @@ The application allows you to add photos of rooms.
 
 ![image](https://github.com/LukaszFlorekProgramming/BookingAPI/assets/56117955/8db62739-594c-4405-ba66-9b8977a3c76a)
 
+### Users implementation
+This implementation allows to identify the user and assign the reservation to his account.
+
+![image](https://github.com/LukaszFlorekProgramming/BookingAPI/assets/56117955/ac61b6f2-32d4-424d-822c-4dafeb212464)
+
+
+If you are interested in cooperation or have questions about my project, please contact me. I am ready to answer your questions, present the technical details of the project and present the good and bad sides of my project.
 
 
 

@@ -18,8 +18,9 @@
     </select>
     <div><button type="button" class="btn btn-info" @onclick="@GetRooms">Filtruj pokoje</button></div>
 </div>
-@if (miasto != string.Empty)
+@*@if (miasto != string.Empty)
 {
+
 <table class="table table-striped table-bordered bg-light">
     <thead>
         <tr>
@@ -52,17 +53,55 @@
             }
     </tbody>
 </table>
+}*@
+
+@if (miasto != string.Empty)
+{
+
+<table class="table table-striped table-bordered bg-light">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Capacity</th>
+            <th>PricePerNight</th>
+            <th>Country</th>
+            <th>City</th>
+            <th>BuildingNumber</th>
+            <th>IdImage</th>
+            <th>Photo</th>
+            <th>See availability</th>
+        </tr>
+    </thead>
+    <tbody>
+
+            @foreach (var roomElement in roomAndPhotos)
+            {
+                <tr>
+                    <td>@roomElement.Id</td>
+                    <td>@roomElement.Name</td>
+                    <td>@roomElement.Capacity</td>
+                    <td>@roomElement.PricePerNight</td>
+                    <td>@roomElement.Country</td>
+                    <td>@roomElement.City</td>
+                    <td>@roomElement.BuildingNumber</td>
+                    <td>@roomElement.ImageId</td>
+                    <td><img src=" @($"data:image /png;base64,{Convert.ToBase64String(@roomElement.PhotoResource)}")" alt="Zdjęcie" width="300" height="200" /></td>
+                    <td><a class="btn btn-primary" href="/createReservation/@roomElement.Id">Check</a></td>
+                </tr>
+            }
+    </tbody>
+</table>
 }
-
 @code {
-
-
     public RoomsVm RoomResponse = new RoomsVm();
     public List<RoomsVm> roomsList = new List<RoomsVm>();
     public List<RoomDto> Rooms = new List<RoomDto>();
     public List<RoomDto> Pokoje = new List<RoomDto>();
     public string miasto = string.Empty;
     public List<string> City = new List<string>();
+    public RoomAndPhotoDto RoomandImage;
+    public List<RoomAndPhotoDto> roomAndPhotos = new List<RoomAndPhotoDto>();
     protected override async Task OnInitializedAsync()
     {
         await GetRooms();
@@ -70,10 +109,12 @@
     private async Task GetRooms()
     {
         City.Clear();
+        roomAndPhotos.Clear();
         RoomResponse = await IRoomService.GetRooms();
         Rooms = RoomResponse.Rooms.ToList();
         Pokoje = Rooms.Where(x => x.City == miasto).ToList();
         AddCityToList();
+        await AddPhotos();
     }
     public void AddCityToList()
     {
@@ -83,14 +124,36 @@
         {
             if (City.Contains(element.City))
             {
-
             }
             else
             {
-                string miasto = element.City;
-                City.Add(miasto);
+                City.Add(element.City);
             }
-            
+        }
+    }
+    public async Task AddPhotos()
+    {
+        int x;
+        foreach (var element in Pokoje)
+        {
+            x = element.ImageId ?? 1;
+            RoomandImage = new RoomAndPhotoDto
+                {
+                    Id = element.Id,
+                    ImageId = element.ImageId,
+                    Name = element.Name,
+                    Capacity = element.Capacity,
+                    IsBooked = element.IsBooked,
+                    PricePerNight = element.PricePerNight,
+                    Street = element.Street,
+                    BuildingNumber = element.BuildingNumber,
+                    RoomNumber = element.RoomNumber,
+                    PostalCode = element.PostalCode,
+                    City = element.City,
+                    Country = element.Country,
+                    PhotoResource = await IRoomService.GetResourseImage(x)
+                };
+            roomAndPhotos.Add(RoomandImage);
         }
     }
     private void Cancel()

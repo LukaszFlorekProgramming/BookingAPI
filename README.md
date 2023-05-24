@@ -1,6 +1,6 @@
 # BookingAPI
 
-BookingAPI to aplikacja do systemu rezerwacji pokoi hotelowych. Aplikacja umożliwia przeglądanie dostępnych pokoi, dokonywanie rezerwacji oraz zarządzanie nimi.
+BookingAPI is an application for the hotel room reservation system. The application allows you to browse available rooms, make reservations and manage them.
 
 #Languages and Tools:
 

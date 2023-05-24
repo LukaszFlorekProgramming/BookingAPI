@@ -6,6 +6,10 @@ Booking is my first extensive project, which was created to develop my programmi
 
 BookingAPI is an application for the hotel room reservation system. The application allows you to browse available rooms, make reservations and manage them.
 
+The application design uses the Onion architecture.The Onion architecture is based on the Dependency Inversion Principle and assumes the division of applications into layers that communicate with each other in a specific direction.
+
+
+
 
 #Languages and Tools:
 
@@ -16,6 +20,9 @@ BookingAPI is an application for the hotel room reservation system. The applicat
 ![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
 ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+![rest (3)](https://github.com/LukaszFlorekProgramming/BookingAPI/assets/56117955/14397813-bc3b-4ee9-803f-9d699893f35d)
+
+
 
 
           

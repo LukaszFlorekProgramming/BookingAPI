@@ -1,6 +1,7 @@
 ﻿@page "/myreservations"
 @using BlazorBooking.Client.Services.Reservation;
 @using BlazorBooking.Shared.Models.Reservation;
+@using BlazorBooking.Shared.Models.Room;
 @using Microsoft.AspNetCore.Authorization;
 @inject NavigationManager NavigationManager
 @inject IReservationService IReservationService
@@ -15,25 +16,27 @@
     <thead>
         <tr>
             <th>Id</th>
-            <th>StartDate</th>
-            <th>EndDate</th>
-            <th>IdRoom</th>
+            <th>Start date</th>
+            <th>End date</th>
+            <th>Room name</th>
+            <th>Price per night</th>
         </tr>
     </thead>
     <tbody>
-        @if (ReservatiuonResponse.Reservations == null)
+        @if (reservationAndRoomName == null)
         {
             <p><em>Loading...</em></p>
         }
         else
         {
-            @foreach (var reservationElement in MyreservationsList)
+            @foreach (var reservationElement in reservationAndRoomName)
                 {
                     <tr>
                         <td>@reservationElement.Id</td>
                         <td>@reservationElement.StartDate</td>
                         <td>@reservationElement.EndDate</td>
-                        <td>@reservationElement.RoomId</td>
+                        <td>@reservationElement.NameRoom</td>
+                        <td>@reservationElement.PricePerNight</td>
                     </tr>
                 }
             
@@ -45,6 +48,9 @@
     public ReservationsVm ReservatiuonResponse = new ReservationsVm();
     public List<ReservationsVm> reservationsList = new List<ReservationsVm>();
     public List<ReservationDto> MyreservationsList = new List<ReservationDto>();
+    public ReservationAndRoomNameDto reservationAndRoom;
+    public RoomDto roomDto;
+    public List<ReservationAndRoomNameDto> reservationAndRoomName = new List<ReservationAndRoomNameDto>();
     protected override async Task OnInitializedAsync()
     {
         await GetReservations();
@@ -58,6 +64,23 @@
             ReservatiuonResponse = await IReservationService.GetReservations();
             reservationsList.Add(ReservatiuonResponse);
             MyreservationsList = reservationsList[0].Reservations.Where(x => x.UserName == user.Identity.Name).ToList();
+        }
+        await AddName();
+    }
+    private async Task AddName()
+    {
+        foreach (var element in MyreservationsList)
+        {
+            var roomDto = await IReservationService.GetRoom(element.RoomId ?? 1);
+            reservationAndRoom = new ReservationAndRoomNameDto
+            {
+                    Id = element.Id,
+                    StartDate = element.StartDate,
+                    EndDate = element.EndDate,
+                    NameRoom = roomDto.Name,
+                    PricePerNight = roomDto.PricePerNight
+            };
+            reservationAndRoomName.Add(reservationAndRoom);
         }
     }
 

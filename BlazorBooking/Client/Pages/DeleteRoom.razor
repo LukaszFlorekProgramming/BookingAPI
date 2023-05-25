@@ -1,0 +1,87 @@
+﻿@page "/deleteRoom"
+@using BlazorBooking.Client.Services.Room;
+@using BlazorBooking.Shared.Models.Room;
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+@inject NavigationManager NavigationManager
+@inject IRoomService IRoomService
+<h3>DeleteRoom</h3>
+
+<table class="table table-striped table-bordered bg-light">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Capacity</th>
+            <th>Price Per Night</th>
+            <th>Country</th>
+            <th>City</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @if (RoomResponse.Rooms == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            @foreach (var roomElement in Pokoje)
+            {
+                    <tr>
+
+                        <td>@roomElement.Id</td>
+                        <td>@roomElement.Name</td>
+                        <td>@roomElement.Capacity</td>
+                        <td>@roomElement.PricePerNight</td>
+                        <td>@roomElement.Country</td>
+                        <td>@roomElement.City</td>
+                        <td>
+                            <button type="button" class="btn btn-danger" @onclick="@(() => @Delete(@roomElement.Id) )">Delete</button>
+                            <button type="button" class="btn btn-secondary" @onclick="@Cancel">Cancel</button>
+                        </td>
+                    </tr>
+            }
+        }
+    </tbody>
+</table>
+
+
+@code {
+    public RoomsVm RoomResponse = new RoomsVm();
+    public List<RoomsVm> roomsList = new List<RoomsVm>();
+
+    public List<RoomDto> Pokoje = new List<RoomDto>();
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await GetRooms();
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+    }
+
+    private async Task GetRooms()
+    {
+        RoomResponse = await IRoomService.GetRooms();
+        roomsList.Add(RoomResponse);
+        Pokoje = RoomResponse.Rooms.ToList();
+    }
+
+    private async Task<int> Delete(int id)
+    {
+        await IRoomService.DeleteRoom(id);
+        NavigationManager.NavigateTo("/rooms");
+        return id;
+    }
+
+    private void Cancel()
+    {
+        NavigationManager.NavigateTo("/rooms");
+    }
+
+}

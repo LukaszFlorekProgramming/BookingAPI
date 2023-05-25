@@ -1,0 +1,85 @@
+﻿@page "/createReservation/{id:int}"
+@using BlazorBooking.Client.Services.Reservation;
+@using BlazorBooking.Client.Services.Room;
+@using BlazorBooking.Shared.Models.Reservation;
+@using BlazorBooking.Shared.Models.Room;
+
+@inject NavigationManager NavigationManager
+@inject IReservationService IReservationService
+@inject IRoomService IRoomService
+@inject AuthenticationStateProvider authenticationStateProvider
+
+<PageTitle>Create Reservation</PageTitle>
+
+<h3>Create Reservation</h3>
+
+<div class="mb-3">
+    @roomName
+</div>
+<div>
+    <img src=" @($"data:image /png;base64,{Convert.ToBase64String(Photo)}")" alt="Zdjęcie" width="300" height="200" />
+</div>
+
+
+<div class="row">
+    <div class="col-sm-4">
+        <EditForm Model="@reservationDto" OnSubmit="AddReservation">
+            
+            <div class="mb-3">
+                <label for="StartDate" class="form-label">Start Date:</label>
+                <InputDate id="StartDate" @bind-Value="reservationDto.StartDate" class="form-control"></InputDate>
+            </div>
+            <div class="mb-3">
+                <label for="EndDate" class="form-label">End Date:</label>
+                <InputDate id="EndDate" @bind-Value="reservationDto.EndDate" class="form-control"></InputDate>
+            </div>
+            
+            
+
+            <button type="submit" class="btn btn-primary">Confirm</button>
+            <button type="button" class="btn btn-secondary" @onclick="@Cancel">Cancel</button>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    public string roomName = String.Empty;
+    public byte[] Photo = new byte[0];
+    int x = 0;
+    private ReservationDto reservationDto = new()
+        {
+            StartDate = DateTime.Now,
+            EndDate = DateTime.Today.AddDays(1),
+            RoomId = 0,
+            UserName = string.Empty
+    };
+    protected override async Task OnInitializedAsync()
+    {
+        await AddReservation();
+        reservationDto.RoomId = Id;
+        var room = await IReservationService.GetRoom(Id);
+        x = room.ImageId ?? 0;
+        roomName = room.Name;
+        Photo = await IReservationService.GetResourseImage(x);
+    }
+
+    private async Task AddReservation()
+    {
+        var authenticationState = await authenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authenticationState.User;
+        reservationDto.UserName = user.Identity.Name;
+
+        if (reservationDto.RoomId != 0)
+        {
+            reservationDto = await IReservationService.CreateRerservation(reservationDto);
+            NavigationManager.NavigateTo("/myreservations");
+        }
+    }
+
+    private void Cancel()
+    {
+        NavigationManager.NavigateTo("/reservations");
+    }
+}

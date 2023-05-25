@@ -1,5 +1,5 @@
 ﻿using Booking.Application.Interfaces;
-using Booking.Persistance.Entities;
+using Booking.Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -21,7 +21,11 @@ namespace Booking.Application.Reservations.Commands.CreateReservation
         {
             Reservation reservation = new()
             {
-                RoomId = request.RoomId
+                RoomId = request.RoomId,
+                StartDate = request.StartDate,
+                EndDate = request.EndDate,
+                UserName = request.UserName
+                
             };
 
             _context.Reservations.Add(reservation);

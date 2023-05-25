@@ -1,4 +1,4 @@
-﻿using Booking.Persistance.Entities;
+﻿using Booking.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,64 +18,68 @@ namespace Booking.Persistance.Migrations
                 {
                     Id = 1,
                     Name = "Room1",
-                    Capacity = 10,
-                    IsBooked = false
-                }, new Room()
+                    Capacity = 1,
+                    IsBooked = false,
+                    PricePerNight = 10,
+                    Street = "Kresowa",
+                    BuildingNumber = 1,
+                    RoomNumber = 1,
+                    PostalCode = "10-203",
+                    City = "Lublin",
+                    Country = "Polska"
+                },
+                new Room()
                 {
                     Id = 2,
                     Name = "Room2",
-                    Capacity = 10,
-                    IsBooked = false
+                    Capacity = 2,
+                    IsBooked = false,
+                    PricePerNight = 12,
+                    Street = "Kresowa",
+                    BuildingNumber = 2,
+                    RoomNumber = 2,
+                    PostalCode = "10-203",
+                    City = "Lublin",
+                    Country = "Polska"
                 },
                 new Room()
                 {
                     Id = 3,
                     Name = "Room3",
-                    Capacity = 10,
-                    IsBooked = false
-                });
+                    Capacity = 3,
+                    IsBooked = false,
+                    PricePerNight = 13,
+                    Street = "Kresowa",
+                    BuildingNumber = 3,
+                    RoomNumber = 3,
+                    PostalCode = "10-203",
+                    City = "Lublin",
+                    Country = "Polska"
+                }
+                );
             });
 
-            modelBuilder.Entity<Reservation>().HasData(
+            /*modelBuilder.Entity<Reservation>().HasData(
                 new Reservation()
                 {
                     Id = 1,
                     StartDate = DateTime.Now,
                     EndDate = DateTime.Now,
-                    CreatedBy=string.Empty,
-                    Created=DateTime.Now,
-                    ModifiedBy=string.Empty,
-                    Modified=DateTime.Now,
-                    StatusId=1,
-                    Inactivated=DateTime.Now,
-                    InactivatedBy=string.Empty
+                    
                 },
                 new Reservation()
                 {
                     Id = 2,
                     StartDate = DateTime.Now,
                     EndDate = DateTime.Now,
-                    CreatedBy=string.Empty,
-                    Created=DateTime.Now,
-                    ModifiedBy=string.Empty,
-                    Modified=DateTime.Now,
-                    StatusId=1,
-                    Inactivated=DateTime.Now,
-                    InactivatedBy=string.Empty
+                    
                 },new Reservation()
                 {
                     Id = 3,
                     StartDate = DateTime.Now,
                     EndDate = DateTime.Now,
-                    CreatedBy=string.Empty,
-                    Created=DateTime.Now,
-                    ModifiedBy=string.Empty,
-                    Modified=DateTime.Now,
-                    StatusId=1,
-                    Inactivated=DateTime.Now,
-                    InactivatedBy=string.Empty
                 }
-                );
+                );*/
         }
     }
 }

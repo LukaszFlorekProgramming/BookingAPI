@@ -13,13 +13,23 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Booking.Infrastructure", "B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{8A92EFBA-16BE-4209-9BD5-5A7EF98176FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booking.Persistance", "Booking.Persistance\Booking.Persistance.csproj", "{CD4C9F38-F039-4FCE-91E7-BA909F60A3FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Booking.Persistance", "Booking.Persistance\Booking.Persistance.csproj", "{CD4C9F38-F039-4FCE-91E7-BA909F60A3FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booking.Common", "Booking.Common\Booking.Common.csproj", "{D684C87D-6E27-4E67-B2EC-22B7E03A07F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Booking.Common", "Booking.Common\Booking.Common.csproj", "{D684C87D-6E27-4E67-B2EC-22B7E03A07F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booking.Domain", "Booking.Domain\Booking.Domain.csproj", "{EF3F0249-ADCC-405A-8178-CA11415BD239}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Booking.Domain", "Booking.Domain\Booking.Domain.csproj", "{EF3F0249-ADCC-405A-8178-CA11415BD239}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booking.Application", "Booking.Application\Booking.Application.csproj", "{2EB53B19-FFFA-4FB2-A781-03582CD8DC42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Booking.Application", "Booking.Application\Booking.Application.csproj", "{2EB53B19-FFFA-4FB2-A781-03582CD8DC42}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{84608A46-5266-4DC8-944E-3657E4BECAA3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.UnitTests", "Application.UnitTests\Application.UnitTests.csproj", "{ABFDCD83-0CCE-4E1F-ACA8-4317ACBB0BE0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorBooking.Client", "BlazorBooking\Client\BlazorBooking.Client.csproj", "{59367B08-0F77-4C08-856E-0314E72D1E34}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorBooking.Server", "BlazorBooking\Server\BlazorBooking.Server.csproj", "{85C25FD7-D310-4B74-A87A-0AE80E4B2B59}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorBooking.Shared", "BlazorBooking\Shared\BlazorBooking.Shared.csproj", "{C1932029-0B4F-4348-A7E8-B8A942708B8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +61,22 @@ Global
 		{2EB53B19-FFFA-4FB2-A781-03582CD8DC42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EB53B19-FFFA-4FB2-A781-03582CD8DC42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EB53B19-FFFA-4FB2-A781-03582CD8DC42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABFDCD83-0CCE-4E1F-ACA8-4317ACBB0BE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABFDCD83-0CCE-4E1F-ACA8-4317ACBB0BE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABFDCD83-0CCE-4E1F-ACA8-4317ACBB0BE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABFDCD83-0CCE-4E1F-ACA8-4317ACBB0BE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59367B08-0F77-4C08-856E-0314E72D1E34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59367B08-0F77-4C08-856E-0314E72D1E34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59367B08-0F77-4C08-856E-0314E72D1E34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59367B08-0F77-4C08-856E-0314E72D1E34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85C25FD7-D310-4B74-A87A-0AE80E4B2B59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85C25FD7-D310-4B74-A87A-0AE80E4B2B59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85C25FD7-D310-4B74-A87A-0AE80E4B2B59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85C25FD7-D310-4B74-A87A-0AE80E4B2B59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1932029-0B4F-4348-A7E8-B8A942708B8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1932029-0B4F-4348-A7E8-B8A942708B8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1932029-0B4F-4348-A7E8-B8A942708B8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1932029-0B4F-4348-A7E8-B8A942708B8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +88,10 @@ Global
 		{D684C87D-6E27-4E67-B2EC-22B7E03A07F7} = {A75B430B-3089-4D65-BDE8-EA5759E2B97F}
 		{EF3F0249-ADCC-405A-8178-CA11415BD239} = {A75B430B-3089-4D65-BDE8-EA5759E2B97F}
 		{2EB53B19-FFFA-4FB2-A781-03582CD8DC42} = {A75B430B-3089-4D65-BDE8-EA5759E2B97F}
+		{ABFDCD83-0CCE-4E1F-ACA8-4317ACBB0BE0} = {84608A46-5266-4DC8-944E-3657E4BECAA3}
+		{59367B08-0F77-4C08-856E-0314E72D1E34} = {8A92EFBA-16BE-4209-9BD5-5A7EF98176FE}
+		{85C25FD7-D310-4B74-A87A-0AE80E4B2B59} = {8A92EFBA-16BE-4209-9BD5-5A7EF98176FE}
+		{C1932029-0B4F-4348-A7E8-B8A942708B8B} = {8A92EFBA-16BE-4209-9BD5-5A7EF98176FE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {60619B5B-3B5D-483A-A784-BFEB8A16B1A6}

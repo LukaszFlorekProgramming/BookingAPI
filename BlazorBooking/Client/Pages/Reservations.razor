@@ -1,0 +1,68 @@
+﻿@page "/reservations"
+@using BlazorBooking.Client.Services.Reservation;
+@using BlazorBooking.Shared.Models.Reservation;
+@using Microsoft.AspNetCore.Authorization;
+@inject NavigationManager NavigationManager
+@inject IReservationService IReserService
+
+<PageTitle>Reservations</PageTitle>
+
+<h1>Reservation List API</h1>
+
+<button type="button" class="btn btn-danger" @onclick="@DeleteReservationNavigate">Delete Reservation</button>
+<table class="table table-striped table-bordered bg-light">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>StartDate</th>
+            <th>EndDate</th>
+            <th>IdRoom</th>
+            <th>User Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (ReservatiuonResponse.Reservations == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            @foreach (var reservation in reservationsList)
+            {
+                @foreach (var reservationElement in reservation.Reservations)
+                {
+                    <tr>
+                        <td>@reservationElement.Id</td>
+                        <td>@reservationElement.StartDate</td>
+                        <td>@reservationElement.EndDate</td>
+                        <td>@reservationElement.RoomId</td>
+                        <td>@reservationElement.UserName</td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>
+
+@code {
+    public ReservationsVm ReservatiuonResponse = new ReservationsVm();
+    public List<ReservationsVm> reservationsList = new List<ReservationsVm>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetReservations();
+    }
+    private async Task GetReservations()
+    {
+        ReservatiuonResponse = await IReserService.GetReservations();
+        reservationsList.Add(ReservatiuonResponse);
+    }
+    private void CreateReservationNavigate()
+    {
+        NavigationManager.NavigateTo("/createReservation");
+    }
+    private void DeleteReservationNavigate()
+    {
+        NavigationManager.NavigateTo("/deleteReservation");
+    }
+}

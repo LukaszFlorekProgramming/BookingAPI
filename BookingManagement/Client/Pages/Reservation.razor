@@ -1,0 +1,21 @@
+﻿@page "/reservations"
+@using BookingManagement.Client.Components
+@using BookingManagement.Client.Models;
+
+<h1>Reservation</h1>
+
+<ReservationsTable Reservations="@reservations"></ReservationsTable>
+
+@code {
+    private List<ReservationDto> reservations;
+
+    protected override async Task OnInitializedAsync()
+    {
+        reservations = new List<ReservationDto>()
+        {
+            new ReservationDto() {Id=1},
+            new ReservationDto() {Id=2},
+            new ReservationDto() {Id=3}
+        };
+    }
+}

@@ -25,7 +25,7 @@ namespace Booking.Application.Behaviours
                 var failures = _validators.Select(x => x.Validate(context)).SelectMany(result => result.Errors).Where(x => x != null).ToList();
                 if(failures.Count != 0)
                 {
-                    throw new Exception();
+                    throw new ValidationException(failures);
                 }
             }
             return await next();

@@ -22,7 +22,7 @@ namespace Booking.Persistance.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Booking.Persistance.Entities.Reservation", b =>
+            modelBuilder.Entity("Booking.Domain.Entities.Image", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,29 +30,25 @@ namespace Booking.Persistance.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
+                    b.Property<byte[]>("PhotoResource")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varbinary(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Images");
+                });
+
+            modelBuilder.Entity("Booking.Domain.Entities.Reservation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("Inactivated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("InactivatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("Modified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ModifiedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("RoomId")
                         .HasColumnType("int");
@@ -60,58 +56,18 @@ namespace Booking.Persistance.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("StatusId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("RoomId");
 
                     b.ToTable("Reservations");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Created = new DateTime(2023, 4, 3, 21, 26, 51, 108, DateTimeKind.Local).AddTicks(939),
-                            CreatedBy = "",
-                            EndDate = new DateTime(2023, 4, 3, 21, 26, 51, 108, DateTimeKind.Local).AddTicks(938),
-                            Inactivated = new DateTime(2023, 4, 3, 21, 26, 51, 108, DateTimeKind.Local).AddTicks(945),
-                            InactivatedBy = "",
-                            Modified = new DateTime(2023, 4, 3, 21, 26, 51, 108, DateTimeKind.Local).AddTicks(941),
-                            ModifiedBy = "",
-                            StartDate = new DateTime(2023, 4, 3, 21, 26, 51, 108, DateTimeKind.Local).AddTicks(903),
-                            StatusId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Created = new DateTime(2023, 4, 3, 21, 26, 51, 108, DateTimeKind.Local).AddTicks(950),
-                            CreatedBy = "",
-                            EndDate = new DateTime(2023, 4, 3, 21, 26, 51, 108, DateTimeKind.Local).AddTicks(949),
-                            Inactivated = new DateTime(2023, 4, 3, 21, 26, 51, 108, DateTimeKind.Local).AddTicks(953),
-                            InactivatedBy = "",
-                            Modified = new DateTime(2023, 4, 3, 21, 26, 51, 108, DateTimeKind.Local).AddTicks(952),
-                            ModifiedBy = "",
-                            StartDate = new DateTime(2023, 4, 3, 21, 26, 51, 108, DateTimeKind.Local).AddTicks(948),
-                            StatusId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Created = new DateTime(2023, 4, 3, 21, 26, 51, 108, DateTimeKind.Local).AddTicks(958),
-                            CreatedBy = "",
-                            EndDate = new DateTime(2023, 4, 3, 21, 26, 51, 108, DateTimeKind.Local).AddTicks(956),
-                            Inactivated = new DateTime(2023, 4, 3, 21, 26, 51, 108, DateTimeKind.Local).AddTicks(960),
-                            InactivatedBy = "",
-                            Modified = new DateTime(2023, 4, 3, 21, 26, 51, 108, DateTimeKind.Local).AddTicks(959),
-                            ModifiedBy = "",
-                            StartDate = new DateTime(2023, 4, 3, 21, 26, 51, 108, DateTimeKind.Local).AddTicks(955),
-                            StatusId = 1
-                        });
                 });
 
-            modelBuilder.Entity("Booking.Persistance.Entities.Room", b =>
+            modelBuilder.Entity("Booking.Domain.Entities.Room", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -119,7 +75,21 @@ namespace Booking.Persistance.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("BuildingNumber")
+                        .HasColumnType("int");
+
                     b.Property<int>("Capacity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ImageId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsBooked")
@@ -130,7 +100,23 @@ namespace Booking.Persistance.Migrations
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("PricePerNight")
+                        .HasColumnType("float");
+
+                    b.Property<int>("RoomNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ImageId");
 
                     b.ToTable("Rooms");
 
@@ -138,36 +124,71 @@ namespace Booking.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            Capacity = 10,
+                            BuildingNumber = 1,
+                            Capacity = 1,
+                            City = "Lublin",
+                            Country = "Polska",
                             IsBooked = false,
-                            Name = "Room1"
+                            Name = "Room1",
+                            PostalCode = "10-203",
+                            PricePerNight = 10.0,
+                            RoomNumber = 1,
+                            Street = "Kresowa"
                         },
                         new
                         {
                             Id = 2,
-                            Capacity = 10,
+                            BuildingNumber = 2,
+                            Capacity = 2,
+                            City = "Lublin",
+                            Country = "Polska",
                             IsBooked = false,
-                            Name = "Room2"
+                            Name = "Room2",
+                            PostalCode = "10-203",
+                            PricePerNight = 12.0,
+                            RoomNumber = 2,
+                            Street = "Kresowa"
                         },
                         new
                         {
                             Id = 3,
-                            Capacity = 10,
+                            BuildingNumber = 3,
+                            Capacity = 3,
+                            City = "Lublin",
+                            Country = "Polska",
                             IsBooked = false,
-                            Name = "Room3"
+                            Name = "Room3",
+                            PostalCode = "10-203",
+                            PricePerNight = 13.0,
+                            RoomNumber = 3,
+                            Street = "Kresowa"
                         });
                 });
 
-            modelBuilder.Entity("Booking.Persistance.Entities.Reservation", b =>
+            modelBuilder.Entity("Booking.Domain.Entities.Reservation", b =>
                 {
-                    b.HasOne("Booking.Persistance.Entities.Room", "Room")
+                    b.HasOne("Booking.Domain.Entities.Room", "Room")
                         .WithMany("Reservations")
                         .HasForeignKey("RoomId");
 
                     b.Navigation("Room");
                 });
 
-            modelBuilder.Entity("Booking.Persistance.Entities.Room", b =>
+            modelBuilder.Entity("Booking.Domain.Entities.Room", b =>
+                {
+                    b.HasOne("Booking.Domain.Entities.Image", "Image")
+                        .WithMany("Rooms")
+                        .HasForeignKey("ImageId");
+
+                    b.Navigation("Image");
+                });
+
+            modelBuilder.Entity("Booking.Domain.Entities.Image", b =>
+                {
+                    b.Navigation("Rooms");
+                });
+
+            modelBuilder.Entity("Booking.Domain.Entities.Room", b =>
                 {
                     b.Navigation("Reservations");
                 });

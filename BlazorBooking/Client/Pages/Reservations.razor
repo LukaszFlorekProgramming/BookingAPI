@@ -21,16 +21,14 @@
         </tr>
     </thead>
     <tbody>
-        @if (ReservatiuonResponse.Reservations == null)
+        @if (reservationsList == null)
         {
             <p><em>Loading...</em></p>
         }
         else
         {
-            @foreach (var reservation in reservationsList)
+            @foreach (var reservationElement in reservationsList)
             {
-                @foreach (var reservationElement in reservation.Reservations)
-                {
                     <tr>
                         <td>@reservationElement.Id</td>
                         <td>@reservationElement.StartDate</td>
@@ -38,15 +36,13 @@
                         <td>@reservationElement.RoomId</td>
                         <td>@reservationElement.UserName</td>
                     </tr>
-                }
             }
         }
     </tbody>
 </table>
 
 @code {
-    public ReservationsVm ReservatiuonResponse = new ReservationsVm();
-    public List<ReservationsVm> reservationsList = new List<ReservationsVm>();
+    public List<ReservationDto> reservationsList = new List<ReservationDto>();
 
     protected override async Task OnInitializedAsync()
     {
@@ -54,8 +50,7 @@
     }
     private async Task GetReservations()
     {
-        ReservatiuonResponse = await IReserService.GetReservations();
-        reservationsList.Add(ReservatiuonResponse);
+        reservationsList = (await IReserService.GetReservations()).Reservations.ToList();
     }
     private void CreateReservationNavigate()
     {

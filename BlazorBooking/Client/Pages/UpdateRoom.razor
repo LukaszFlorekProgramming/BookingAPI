@@ -84,14 +84,13 @@
             PostalCode = string.Empty,
             City = string.Empty,
             Country = string.Empty
-        };
+    };
 
     protected override async Task OnInitializedAsync()
     {
         await RoomUpdate();
         roomDto.Id = Id;
     }
-
 
     private async Task RoomUpdate()
     {
@@ -106,12 +105,9 @@
             roomDto = result;
         }
     }
+
     private void Cancel()
     {
         NavigationManager.NavigateTo("/rooms");
-    }
-    public void change()
-    {
-        roomDto.Id = Id;
     }
 }

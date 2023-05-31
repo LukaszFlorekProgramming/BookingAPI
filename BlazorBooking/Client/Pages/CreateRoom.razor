@@ -73,22 +73,21 @@
                 <ValidationMessage For="@(() => roomDto.ImageId)" />
             </div>
 
-
             <table class="table table-striped table-bordered bg-light">
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Podgląd Zdjęcia</th>
+                        <th>Photo preview</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @if (ImagesWhere == null)
+                    @if (Images == null)
                     {
                         <p><em>Loading...</em></p>
                     }
                     else
                     {
-                        @foreach (var imageElement in ImagesWhere)
+                        @foreach (var imageElement in Images)
                         {
 
                             <tr>
@@ -102,38 +101,27 @@
 
             <button type="submit" class="btn btn-primary">Save</button>
             <button type="button" class="btn btn-secondary" @onclick="@Cancel">Cancel</button>
-
             <ValidationSummary />
         </EditForm>
     </div>
 </div>
 
 @code {
-    public ImageVm ImageResponse = new ImageVm();
-    public List<ImageVm> imagesList = new List<ImageVm>();
     public List<ImageDto> Images = new List<ImageDto>();
-    public List<ImageDto> ImagesWhere = new List<ImageDto>();
-    public List<byte[]> ImagesResourse = new List<byte[]>();
     private RoomDto roomDto = new RoomDto();
 
     protected override async Task OnInitializedAsync()
     {
         await AddRoom();
     }
-
     private async Task AddRoom()
     {
         if (roomDto.Name != string.Empty)
         {
-            ImagesWhere.Clear();
             roomDto = await IRoomService.CreateRoom(roomDto);
-
-
             NavigationManager.NavigateTo("/rooms");
         }
-        ImageResponse = await IImageService.GetImages();
-        Images= ImageResponse.Images.ToList();
-        ImagesWhere = Images.Where(image => image.PhotoResource != null).ToList();
+        Images = (await IImageService.GetImages()).Images.Where(image => image.PhotoResource != null).ToList();
     }
     private void Cancel()
     {

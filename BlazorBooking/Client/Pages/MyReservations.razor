@@ -39,14 +39,11 @@
                         <td>@reservationElement.PricePerNight</td>
                     </tr>
                 }
-            
         }
     </tbody>
 </table>
 
 @code {
-    public ReservationsVm ReservatiuonResponse = new ReservationsVm();
-    public List<ReservationsVm> reservationsList = new List<ReservationsVm>();
     public List<ReservationDto> MyreservationsList = new List<ReservationDto>();
     public ReservationAndRoomNameDto reservationAndRoom;
     public RoomDto roomDto;
@@ -61,13 +58,11 @@
         var user = authenticationState.User;
         if (user != null)
         {
-            ReservatiuonResponse = await IReservationService.GetReservations();
-            reservationsList.Add(ReservatiuonResponse);
-            MyreservationsList = reservationsList[0].Reservations.Where(x => x.UserName == user.Identity.Name).ToList();
+            MyreservationsList = (await IReservationService.GetReservations()).Reservations.Where(x => x.UserName == user.Identity.Name).ToList();
         }
-        await AddName();
+        await AddNameRoomToListReservations();
     }
-    private async Task AddName()
+    private async Task AddNameRoomToListReservations()
     {
         foreach (var element in MyreservationsList)
         {

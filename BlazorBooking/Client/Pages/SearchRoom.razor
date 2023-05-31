@@ -54,14 +54,13 @@
 </table>
 }
 @code {
-    public RoomsVm RoomResponse = new RoomsVm();
-    public List<RoomsVm> roomsList = new List<RoomsVm>();
     public List<RoomDto> Rooms = new List<RoomDto>();
     public List<RoomDto> Pokoje = new List<RoomDto>();
     public string miasto = string.Empty;
     public List<string> City = new List<string>();
     public RoomAndPhotoDto RoomandImage;
     public List<RoomAndPhotoDto> roomAndPhotos = new List<RoomAndPhotoDto>();
+
     protected override async Task OnInitializedAsync()
     {
         await GetRooms();
@@ -70,22 +69,17 @@
     {
         City.Clear();
         roomAndPhotos.Clear();
-        RoomResponse = await IRoomService.GetRooms();
-        Rooms = RoomResponse.Rooms.ToList();
-        Pokoje = Rooms.Where(x => x.City == miasto).ToList();
+        Rooms = (await IRoomService.GetRooms()).Rooms.ToList();
+        Pokoje = (await IRoomService.GetRooms()).Rooms.Where(x => x.City == miasto).ToList();
         AddCityToList();
         await AddPhotos();
     }
     public void AddCityToList()
     {
         City.Add(miasto);
-
         foreach (var element in Rooms)
         {
-            if (City.Contains(element.City))
-            {
-            }
-            else
+            if (!City.Contains(element.City))
             {
                 City.Add(element.City);
             }
@@ -93,12 +87,10 @@
     }
     public async Task AddPhotos()
     {
-        int x;
         foreach (var element in Pokoje)
         {
-            x = element.ImageId ?? 1;
             RoomandImage = new RoomAndPhotoDto
-                {
+            {
                     Id = element.Id,
                     ImageId = element.ImageId,
                     Name = element.Name,
@@ -111,8 +103,8 @@
                     PostalCode = element.PostalCode,
                     City = element.City,
                     Country = element.Country,
-                    PhotoResource = await IRoomService.GetResourseImage(x)
-                };
+                    PhotoResource = await IRoomService.GetResourseImage(element.ImageId ?? 1)
+            };
             roomAndPhotos.Add(RoomandImage);
         }
     }

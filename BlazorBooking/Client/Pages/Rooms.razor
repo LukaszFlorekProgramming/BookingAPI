@@ -27,17 +27,15 @@
         </tr>
     </thead>
     <tbody>
-
-        @if (RoomResponse.Rooms == null)
+        @if (roomsList == null)
         {
             <p><em>Loading...</em></p>
         }
         else
         {
-            @foreach (var room in roomsList)
+            @foreach (var roomElement in roomsList)
             {
-                @foreach (var roomElement in room.Rooms)
-                {
+                
                     <tr>
                         <td>@roomElement.Id</td>
                         <td>@roomElement.Name</td>
@@ -49,7 +47,6 @@
                         <td>@roomElement.ImageId</td>
                         <td><a class="btn btn-warning" href="/updateroom/@roomElement.Id">Update</a></td>
                     </tr>
-                }
             }
         }
     </tbody>
@@ -57,8 +54,7 @@
 
 
 @code {
-    public RoomsVm RoomResponse = new RoomsVm();
-    public List<RoomsVm> roomsList = new List<RoomsVm>();
+    public List<RoomDto> roomsList = new List<RoomDto>();
     protected override async Task OnInitializedAsync()
     {
         try
@@ -72,15 +68,12 @@
     }
     private async Task GetRooms()
     {
-        RoomResponse = await IRoomService.GetRooms();
-        roomsList.Add(RoomResponse);
-        
+        roomsList = (await IRoomService.GetRooms()).Rooms.ToList();
     }
-    private async Task<int> Delete(int id)
+    private async Task Delete(int id)
     {
         await IRoomService.DeleteRoom(id);
         NavigationManager.NavigateTo("/rooms");
-        return id;
     }
     private void Cancel()
     {
@@ -93,15 +86,5 @@
     private void DeleteRoomNavigate()
     {
         NavigationManager.NavigateTo("/deleteRoom");
-    }
-
-    private void UpdateRoomNavigate()
-    {
-        NavigationManager.NavigateTo("/updateRoom");
-    }
-
-    private void PrzekazDoInnegoWidoku(int parametr)
-    {
-        NavigationManager.NavigateTo($"/updateRoom/{parametr}");
     }
 }

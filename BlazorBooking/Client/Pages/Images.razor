@@ -9,7 +9,7 @@
 <PageTitle>Images</PageTitle>
 
 <button type="button" class="btn btn-success" @onclick="@AddImageNavigate">Add Image</button>
-<button type="button" class="btn btn-danger" @onclick="@DeleteRoomNavigate">Delete Room</button>
+<button type="button" class="btn btn-danger" @onclick="@DeleteRoomNavigate">Delete Image</button>
 
 <table class="table table-striped table-bordered bg-light">
     <thead>
@@ -20,31 +20,25 @@
     </thead>
     <tbody>
 
-        @if (ImageResponse.Images == null)
+        @if (imagesList == null)
         {
             <p><em>Loading...</em></p>
         }
         else
         {
-            @foreach (var image in imagesList)
-            {
-                @foreach (var imageElement in image.Images)
+                @foreach (var imageElement in imagesList)
                 {
                     <tr>
                         <td>@imageElement.Id</td>
                         <td><img src="@($"data:image/png;base64,{Convert.ToBase64String(@imageElement.PhotoResource)}")" alt="Zdjęcie" width="300" height="200" /></td>
                     </tr>
                 }
-            }
         }
     </tbody>
 </table>
 
-
-
 @code {
-    public ImageVm ImageResponse = new ImageVm();
-    public List<ImageVm> imagesList = new List<ImageVm>();
+    public List<ImageDto> imagesList = new List<ImageDto>();
 
     protected override async Task OnInitializedAsync()
     {
@@ -52,8 +46,7 @@
     }
     private async Task GetImages()
     {
-        ImageResponse = await IImageService.GetImages();
-        imagesList.Add(ImageResponse);
+        imagesList = (await IImageService.GetImages()).Images.ToList();
     }
     private void AddImageNavigate()
     {

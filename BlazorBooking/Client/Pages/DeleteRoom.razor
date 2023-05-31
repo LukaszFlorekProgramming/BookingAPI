@@ -21,13 +21,13 @@
     </thead>
     <tbody>
 
-        @if (RoomResponse.Rooms == null)
+        @if (roomsList == null)
         {
             <p><em>Loading...</em></p>
         }
         else
         {
-            @foreach (var roomElement in Pokoje)
+            @foreach (var roomElement in roomsList)
             {
                     <tr>
 
@@ -49,10 +49,7 @@
 
 
 @code {
-    public RoomsVm RoomResponse = new RoomsVm();
-    public List<RoomsVm> roomsList = new List<RoomsVm>();
-
-    public List<RoomDto> Pokoje = new List<RoomDto>();
+    public List<RoomDto> roomsList = new List<RoomDto>();
     protected override async Task OnInitializedAsync()
     {
         try
@@ -67,9 +64,7 @@
 
     private async Task GetRooms()
     {
-        RoomResponse = await IRoomService.GetRooms();
-        roomsList.Add(RoomResponse);
-        Pokoje = RoomResponse.Rooms.ToList();
+        roomsList = (await IRoomService.GetRooms()).Rooms.ToList();
     }
 
     private async Task<int> Delete(int id)

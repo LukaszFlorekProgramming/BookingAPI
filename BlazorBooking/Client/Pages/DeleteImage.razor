@@ -20,15 +20,13 @@
         </tr>
     </thead>
     <tbody>
-        @if (ImageResponse.Images == null)
+        @if (imagesList == null)
         {
             <p><em>Loading...</em></p>
         }
         else
         {
-            @foreach (var image in imagesList)
-            {
-                @foreach (var imageElement in image.Images)
+                @foreach (var imageElement in imagesList)
                 {
                     <tr>
                         <td>@imageElement.Id</td>
@@ -40,14 +38,12 @@
                         </td>
                     </tr>
                 }
-            }
         }
     </tbody>
 </table>
 
 @code {
-    public ImageVm ImageResponse = new ImageVm();
-    public List<ImageVm> imagesList = new List<ImageVm>();
+    public List<ImageDto> imagesList = new List<ImageDto>();
 
     protected override async Task OnInitializedAsync()
     {
@@ -62,8 +58,7 @@
     }
     private async Task GetImages()
     {
-        ImageResponse = await IImageService.GetImages();
-        imagesList.Add(ImageResponse);
+        imagesList = (await IImageService.GetImages()).Images.ToList();
     }
     private async Task DeleteImg(int id)
     {

@@ -43,5 +43,10 @@ namespace BlazorBooking.Client.Services.Room
             var image = await _httpClient.GetFromJsonAsync<ImageDto>($"api/images/{idImage}");
             return image.PhotoResource;
         }
+
+        public async Task<RoomsAndImagesVm> GetRoomWithPhoto()
+        {
+            return await _httpClient.GetFromJsonAsync<RoomsAndImagesVm>("api/roomsandimages/GetRoomsWithPhotos");
+        }
     }
 }

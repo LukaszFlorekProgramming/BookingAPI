@@ -31,15 +31,16 @@ namespace Application.UnitTests.Reservation.Commands.UpdateReservation
         {
             var command = new UpdateReservationCommand()
             {
-                //Id = 11,// potrzebna poprawka
+                Id = 123,
                 RoomId = 4,
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(1),
-                UserName = "Test"
+                UserName = "Test2"
             };
             var result = await _handler.Handle(command, CancellationToken.None);
-            var dir = await _context.Reservations.FirstAsync(x => x.Id == result.Id, CancellationToken.None);
+            var dir = await _context.Reservations.FirstAsync(x => x.Id == 11, CancellationToken.None);
             dir.ShouldNotBeNull();
+            dir.UserName.ShouldBe("Test2");
         }
     }
 }

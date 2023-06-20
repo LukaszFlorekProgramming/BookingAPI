@@ -45,6 +45,8 @@ namespace Application.UnitTests.Common
             };
             context.Rooms.Add(room);
 
+            
+
             var reservation = new Booking.Domain.Entities.Reservation() { 
                 Id = 11,
                 StartDate = DateTime.Now,
@@ -52,6 +54,16 @@ namespace Application.UnitTests.Common
                 UserName = "usertest.@gmail.com",
                 RoomId = 4 };
             context.Reservations.Add(reservation);
+
+            var reservation2 = new Booking.Domain.Entities.Reservation()
+            {
+                Id = 123,
+                StartDate = DateTime.Now,
+                EndDate = dateTime,
+                UserName = "usertest2.@gmail.com",
+                RoomId = 4
+            };
+            context.Reservations.Add(reservation2);
 
             var image = new Booking.Domain.Entities.Image()
             {

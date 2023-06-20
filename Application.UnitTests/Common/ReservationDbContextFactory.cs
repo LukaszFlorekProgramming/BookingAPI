@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace Application.UnitTests.Common
     {
         public static Mock<ReservationDbContext> Create()
         {
-            var dateTime = new DateTime(2000, 1, 1);
+            var dateTime = new DateTime(2023, 6, 20);
             var dateTimeMock = new Mock<IDateTime>();
             dateTimeMock.Setup(m => m.Now).Returns(dateTime);
 
@@ -27,15 +28,39 @@ namespace Application.UnitTests.Common
 
             context.Database.EnsureCreated();
 
-            var room = new Room() { Id = 4, Capacity = 10, IsBooked = false, Name = "Room4"  };
+            var room = new Room()
+            {
+                Id = 79,
+                Name = "Roomtest",
+                Capacity = 2,
+                IsBooked = false,
+                PricePerNight = 200,
+                Street = "Kresowa",
+                BuildingNumber = 10,
+                RoomNumber = 20,
+                PostalCode = "212-12",
+                City = "Lublin",
+                Country = "Polska",
+                ImageId = 37
+            };
             context.Rooms.Add(room);
 
-            var reservation = new Booking.Domain.Entities.Reservation() { Id = 11, RoomId = 4 };
+            var reservation = new Booking.Domain.Entities.Reservation() { 
+                Id = 11,
+                StartDate = DateTime.Now,
+                EndDate = dateTime,
+                UserName = "usertest.@gmail.com",
+                RoomId = 4 };
             context.Reservations.Add(reservation);
-            
+
+            var image = new Booking.Domain.Entities.Image()
+            {
+                Id = 12,
+                PhotoResource = new byte[] { 0x12, 0x34, 0x56, 0x78, 0x9A },
+            };
+            context.Images.Add(image);
 
             context.SaveChanges();
-
             return mock;
         }
 

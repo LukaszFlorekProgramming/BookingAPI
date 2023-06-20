@@ -23,10 +23,11 @@ namespace Application.UnitTests.Reservation.Commands.CreateReservation
         public async Task Handle_GivenValidRequest_ShouldInsertReservation()
         {
             var command = new CreateReservationCommand()
-            { 
+            {
                 RoomId = 4,
-                EndDate = DateTime.Now,
-                StartDate = DateTime.Now
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now.AddDays(1),
+                UserName = "Test"
             };
 
             var result = await _handler.Handle(command, CancellationToken.None);

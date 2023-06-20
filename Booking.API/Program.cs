@@ -4,7 +4,6 @@ using Booking.Persistance;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Serilog;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 

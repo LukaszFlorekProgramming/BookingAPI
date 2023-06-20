@@ -28,7 +28,7 @@ namespace Application.UnitTests.Common
 
             context.Database.EnsureCreated();
 
-            var room = new Room()
+            var room = new Booking.Domain.Entities.Room()
             {
                 Id = 79,
                 Name = "Roomtest",

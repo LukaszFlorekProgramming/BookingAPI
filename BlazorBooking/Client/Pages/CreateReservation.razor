@@ -26,23 +26,54 @@
             
             <div class="mb-3">
                 <label for="StartDate" class="form-label">Start Date:</label>
-                <InputDate id="StartDate" @bind-Value="reservationDto.StartDate" class="form-control"></InputDate>
+                <InputDate id="StartDate" @bind-Value="reservationDto.StartDate" class="form-control" min="@StartDateCalendar" @onclick="@xd"></InputDate>
             </div>
             <div class="mb-3">
                 <label for="EndDate" class="form-label">End Date:</label>
-                <InputDate id="EndDate" @bind-Value="reservationDto.EndDate" class="form-control"></InputDate>
+                <InputDate id="EndDate" @bind-Value="reservationDto.EndDate" class="form-control" min="@EndDateCalendar"></InputDate>
             </div>
             <button type="submit" class="btn btn-primary">Confirm</button>
             <button type="button" class="btn btn-secondary" @onclick="@Cancel">Cancel</button>
         </EditForm>
     </div>
+
 </div>
+
+<table class="table table-striped table-bordered bg-light">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Start date</th>
+            <th>End date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (MyreservationsList == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            @foreach (var reservationElement in MyreservationsList)
+            {
+                <tr>
+                    <td>@reservationElement.Id</td>
+                    <td>@reservationElement.StartDate</td>
+                    <td>@reservationElement.EndDate</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
 
 @code {
     [Parameter]
     public int IdRoom { get; set; }
     public string roomName = String.Empty;
     public byte[] Photo = new byte[0];
+    public string StartDateCalendar = DateTime.Now.ToString("yyyy-MM-dd");
+    public string EndDateCalendar = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
+    public List<ReservationDto> MyreservationsList = new List<ReservationDto>();
     private ReservationDto reservationDto = new()
     {
             StartDate = DateTime.Now,
@@ -52,6 +83,7 @@
     };
     protected override async Task OnInitializedAsync()
     {
+        await GetReservations();
         await AddReservation();
         reservationDto.RoomId = IdRoom;
         var room = await IReservationService.GetRoom(IdRoom);
@@ -71,6 +103,13 @@
             NavigationManager.NavigateTo("/myreservations");
         }
     }
+    private async Task GetReservations()
+    {
+        MyreservationsList = (await IReservationService.GetReservations()).Reservations.Where(x => x.RoomId == IdRoom).ToList();
+    }
+
+    public void xd()
+    { }
 
     private void Cancel()
     {

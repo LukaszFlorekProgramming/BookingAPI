@@ -32,6 +32,7 @@ namespace Booking.Application.Rooms.Commands.CreateRoom
                 City = request.City,
                 Country = request.Country,
                 ImageId = request.ImageId,
+                HotelId = request.HotelId
             };
 
             _context.Rooms.Add(room);

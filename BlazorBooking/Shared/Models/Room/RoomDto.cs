@@ -31,5 +31,6 @@ namespace BlazorBooking.Shared.Models.Room
         public string Country { get; set; }
         [Required(ErrorMessage = "Please enter a image")]
         public int? ImageId { get; set; }
+        public int? HotelId { get; set; }
     }
 }

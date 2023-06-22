@@ -22,7 +22,10 @@ namespace Booking.Domain.Entities
         public string Country { get; set; }
         public int? ImageId { get; set; }
         public Image Image { get; set; }
-        public ICollection<Reservation> Reservations { get; set; } 
-        
+        public ICollection<Reservation> Reservations { get; set; }
+
+        public int? HotelId { get; set; }
+        public Hotel Hotel { get; set; }
+
     }
 }

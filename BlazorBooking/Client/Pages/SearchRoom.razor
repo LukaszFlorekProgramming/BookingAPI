@@ -31,6 +31,7 @@
             <th>Country</th>
             <th>City</th>
             <th>Building Number</th>
+            <th>IdHotel</th>
             <th>Photo</th>
             <th>See availability</th>
         </tr>
@@ -46,6 +47,7 @@
                     <td>@roomElement.Country</td>
                     <td>@roomElement.City</td>
                     <td>@roomElement.BuildingNumber</td>
+                    <td>@roomElement.HotelId</td>
                     <td><img src=" @($"data:image /png;base64,{Convert.ToBase64String(@roomElement.PhotoResource)}")" alt="Zdjęcie" width="300" height="200" /></td>
                     <td><a class="btn btn-primary" href="/createReservation/@roomElement.Id">Check</a></td>
                 </tr>
@@ -58,8 +60,8 @@
     public List<RoomDto> Pokoje = new List<RoomDto>();
     public string miasto = string.Empty;
     public List<string> City = new List<string>();
-    public RoomAndPhotoDto RoomandImage;
-    public List<RoomAndPhotoDto> roomAndPhotos = new List<RoomAndPhotoDto>();
+    public RoomAndImageDto RoomandImage;
+    public List<RoomAndImageDto> roomAndPhotos = new List<RoomAndImageDto>();
 
     protected override async Task OnInitializedAsync()
     {
@@ -89,8 +91,8 @@
     {
         foreach (var element in Pokoje)
         {
-            RoomandImage = new RoomAndPhotoDto
-            {
+            RoomandImage = new RoomAndImageDto
+                {
                     Id = element.Id,
                     ImageId = element.ImageId,
                     Name = element.Name,
@@ -103,6 +105,7 @@
                     PostalCode = element.PostalCode,
                     City = element.City,
                     Country = element.Country,
+                    HotelId = element.HotelId,
                     PhotoResource = await IRoomService.GetResourseImage(element.ImageId ?? 1)
             };
             roomAndPhotos.Add(RoomandImage);

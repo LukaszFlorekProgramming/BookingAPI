@@ -13,6 +13,7 @@ namespace Booking.Application.Interfaces
         DbSet<Reservation> Reservations { get; set; }
         DbSet<Room> Rooms { get; set; }
         DbSet<Image> Images { get; set; }
+        DbSet<Hotel> Hotels { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
         
     }

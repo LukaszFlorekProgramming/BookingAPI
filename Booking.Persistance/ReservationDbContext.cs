@@ -22,7 +22,7 @@ namespace Booking.Persistance
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Image> Images { get; set; }
-        public DbSet<Hotel> Hotel { get; set; }
+        public DbSet<Hotel> Hotels { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

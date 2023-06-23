@@ -32,7 +32,7 @@ namespace Application.UnitTests.Reservation.Queries.GetReservations
             var result = await handler.Handle(new GetReservationsQuery(), CancellationToken.None);
 
             result.ShouldBeOfType<ReservationsVm>();
-            result.Reservations.Count.ShouldBe(1);
+            result.Reservations.Count.ShouldBe(2);
         }
     }
 }

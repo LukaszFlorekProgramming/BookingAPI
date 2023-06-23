@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlazorBooking.Shared.Models.Image
 {
-    public class ImageVm
+    public class ImagesVm
     {
         public ICollection<ImageDto> Images { get; set; }
     }

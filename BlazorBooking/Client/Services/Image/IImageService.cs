@@ -4,7 +4,7 @@ namespace BlazorBooking.Client.Services.Image
 {
     public interface IImageService
     {
-        Task<ImageVm> GetImages();
+        Task<ImagesVm> GetImages();
         Task<ImageDto> CreateImage(ImageDto imageDto);
         Task DeleteImage(int id);
     }

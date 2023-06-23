@@ -1,4 +1,5 @@
 using BlazorBooking.Client;
+using BlazorBooking.Client.Services.Hotel;
 using BlazorBooking.Client.Services.Image;
 using BlazorBooking.Client.Services.Reservation;
 using BlazorBooking.Client.Services.Room;
@@ -23,6 +24,10 @@ builder.Services.AddHttpClient<IRoomService, RoomService>(client =>
     client.BaseAddress = new Uri("https://localhost:44318/");
 });
 builder.Services.AddHttpClient<IImageService, ImageService>(client =>
+{
+    client.BaseAddress = new Uri("https://localhost:44318/");
+});
+builder.Services.AddHttpClient<IHotelService, HotelService>(client =>
 {
     client.BaseAddress = new Uri("https://localhost:44318/");
 });

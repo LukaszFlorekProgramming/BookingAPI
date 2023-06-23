@@ -22,9 +22,9 @@ namespace BlazorBooking.Client.Services.Image
         }
 
 
-        public async Task<ImageVm> GetImages()
+        public async Task<ImagesVm> GetImages()
         {
-            return await _httpClient.GetFromJsonAsync<ImageVm>("api/images/GetImages");
+            return await _httpClient.GetFromJsonAsync<ImagesVm>("api/images/GetImages");
         }
     }
 }

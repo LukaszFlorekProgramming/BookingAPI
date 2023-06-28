@@ -1,8 +1,11 @@
 ﻿@page "/searchrooms"
+@using BlazorBooking.Client.Services.Hotel;
 @using BlazorBooking.Client.Services.Room;
+@using BlazorBooking.Shared.Models.Hotel;
 @using BlazorBooking.Shared.Models.Room;
 @inject NavigationManager NavigationManager
 @inject IRoomService IRoomService
+@inject IHotelService IHotelServ
 
 <PageTitle>Search Rooms</PageTitle>
 <h3>Search Room</h3>
@@ -16,8 +19,25 @@
             <option>@element</option>
         }
     </select>
+    <label for="name" class="form-label">Enter the hotel:</label>
+    <select @bind="IdHotel">
+        @foreach (var element in hotelsList)
+        {
+            <option>@element.HotelId</option>
+        }
+    </select>
     <div><button type="button" class="btn btn-info" @onclick="@GetRooms">Search</button></div>
 </div>
+@*<div class="mb-3">
+    <label for="name" class="form-label">Enter the hotel:</label>
+    <select @bind="hotel">
+        @foreach (var element in hotelsList)
+        {
+            <option>@element.Name</option>
+        }
+    </select>
+    <div><button type="button" class="btn btn-info" @onclick="@GetRooms">Search</button></div>
+</div>*@
 
 @if (miasto != string.Empty)
 {
@@ -59,9 +79,13 @@
     public List<RoomDto> Rooms = new List<RoomDto>();
     public List<RoomDto> Pokoje = new List<RoomDto>();
     public string miasto = string.Empty;
+    public string hotel = string.Empty;
+    public int IdHotel = 0;
     public List<string> City = new List<string>();
+    public List<string> Hotels = new List<string>();
     public RoomAndImageDto RoomandImage;
     public List<RoomAndImageDto> roomAndPhotos = new List<RoomAndImageDto>();
+    public List<HotelDto> hotelsList = new List<HotelDto>();
 
     protected override async Task OnInitializedAsync()
     {
@@ -70,9 +94,21 @@
     private async Task GetRooms()
     {
         City.Clear();
+        hotelsList.Clear();
         roomAndPhotos.Clear();
         Rooms = (await IRoomService.GetRooms()).Rooms.ToList();
-        Pokoje = (await IRoomService.GetRooms()).Rooms.Where(x => x.City == miasto).ToList();
+        if (miasto != string.Empty)
+        {
+            hotelsList = (await IHotelServ.GetHotels()).Hotels.Where(x => x.City == miasto).ToList();
+        }
+        if (IdHotel == 0)
+        {
+            Pokoje = (await IRoomService.GetRooms()).Rooms.Where(x => x.City == miasto).ToList();
+        }
+        else
+        {
+            Pokoje = (await IRoomService.GetRooms()).Rooms.Where(x => x.City == miasto && x.HotelId == IdHotel).ToList();
+        }
         AddCityToList();
         await AddPhotos();
     }
@@ -92,7 +128,7 @@
         foreach (var element in Pokoje)
         {
             RoomandImage = new RoomAndImageDto
-                {
+            {
                     Id = element.Id,
                     ImageId = element.ImageId,
                     Name = element.Name,

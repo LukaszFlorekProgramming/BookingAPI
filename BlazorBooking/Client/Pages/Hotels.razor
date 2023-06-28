@@ -1,0 +1,49 @@
+﻿@page "/hotels"
+@using BlazorBooking.Client.Services.Hotel;
+@using BlazorBooking.Shared.Models.Hotel;
+@inject IHotelService IHotelServ
+
+<PageTitle>Hotels</PageTitle>
+<h3>Hotels</h3>
+
+<table class="table table-striped table-bordered bg-light">
+    <thead>
+        <tr>
+            <th>HotelId</th>
+            <th>Name</th>
+            <th>City</th>
+            <th>Country</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (hotelsList == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            @foreach (var hotelElement in hotelsList)
+            {
+                <tr>
+                    <td>@hotelElement.HotelId</td>
+                    <td>@hotelElement.Name</td>
+                    <td>@hotelElement.City</td>
+                    <td>@hotelElement.Country</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@code {
+    public List<HotelDto> hotelsList = new List<HotelDto>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetHotels();
+    }
+    private async Task GetHotels()
+    {
+        hotelsList = (await IHotelServ.GetHotels()).Hotels.ToList();
+    }
+}

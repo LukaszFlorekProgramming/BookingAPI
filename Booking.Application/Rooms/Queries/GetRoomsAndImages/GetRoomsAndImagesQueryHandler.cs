@@ -26,7 +26,7 @@ namespace Booking.Application.Rooms.Queries.GetRoomsAndImages
 
         public async Task<RoomsAndImagesVm> Handle(GetRoomsAndImagesQuery request, CancellationToken cancellationToken)
         {
-            var RoomsAndImages = await _context.Rooms.AsNoTracking().ProjectTo<RoomAndImageDto>(_mapper.ConfigurationProvider).ToListAsync();
+            var RoomsAndImages = await _context.Rooms.Include(x => x.Hotel).ProjectTo<RoomAndImageDto>(_mapper.ConfigurationProvider).ToListAsync();
 
             return new RoomsAndImagesVm() { RoomsAndImages = RoomsAndImages };
         }

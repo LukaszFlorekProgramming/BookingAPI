@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Booking.Application.Rooms.Queries.GetRoomsAndImages
 {
@@ -25,11 +26,13 @@ namespace Booking.Application.Rooms.Queries.GetRoomsAndImages
         public int? ImageId { get; set; }
         public int? HotelId { get; set; }
         public byte[] PhotoResource { get; set; }
+        public string NameHotel { get; set; } = string.Empty;
 
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Room, RoomAndImageDto>()
-                .ForMember(d => d.PhotoResource, map => map.MapFrom(src => src.Image.PhotoResource));
+                .ForMember(d => d.PhotoResource, map => map.MapFrom(src => src.Image.PhotoResource))
+                .ForMember(x => x.NameHotel, map => map.MapFrom(src => src.Hotel.Name));
         }
          
     }

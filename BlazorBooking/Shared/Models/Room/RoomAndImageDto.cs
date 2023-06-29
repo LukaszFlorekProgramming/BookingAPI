@@ -22,5 +22,6 @@ namespace BlazorBooking.Shared.Models.Room
         public int? ImageId { get; set; }
         public int? HotelId { get; set; }
         public byte[] PhotoResource { get; set; }
+        public string NameHotel { get; set; } = string.Empty;
     }
 }

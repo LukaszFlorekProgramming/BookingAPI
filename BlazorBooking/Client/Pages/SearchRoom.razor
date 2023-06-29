@@ -1,64 +1,56 @@
 ﻿@page "/searchrooms"
 @using BlazorBooking.Client.Services.Hotel;
 @using BlazorBooking.Client.Services.Room;
-@using BlazorBooking.Shared.Models.Hotel;
 @using BlazorBooking.Shared.Models.Room;
+
 @inject NavigationManager NavigationManager
 @inject IRoomService IRoomService
 @inject IHotelService IHotelServ
 
 <PageTitle>Search Rooms</PageTitle>
-<h3>Search Room</h3>
-
+<h3>Search Apartament</h3>
 
 <div class="mb-3">
     <label for="name" class="form-label">Enter the city:</label>
     <select @bind="miasto">
-        @foreach (var element in City)
+        <option value="">select city</option>
+        @foreach (var element in Cities)
         {
             <option>@element</option>
         }
     </select>
-    <label for="name" class="form-label">Enter the hotel:</label>
-    <select @bind="IdHotel">
-        @foreach (var element in hotelsList)
-        {
-            <option>@element.HotelId</option>
-        }
-    </select>
-    <div><button type="button" class="btn btn-info" @onclick="@GetRooms">Search</button></div>
 </div>
-@*<div class="mb-3">
+
+<div class="mb-3">
     <label for="name" class="form-label">Enter the hotel:</label>
     <select @bind="hotel">
-        @foreach (var element in hotelsList)
+        @foreach (var element in Hotels)
         {
-            <option>@element.Name</option>
+            <option>@element</option>
         }
     </select>
-    <div><button type="button" class="btn btn-info" @onclick="@GetRooms">Search</button></div>
-</div>*@
+    <div><button type="button" class="btn btn-info" @onclick="@Search">Search</button></div>
+</div>
 
 @if (miasto != string.Empty)
 {
+    <table class="table table-striped table-bordered bg-light">
+        <thead>
+            <tr class="bg-primary" style="color:aliceblue">
+                <th>Name</th>
+                <th>Capacity</th>
+                <th>Price per night</th>
+                <th>Country</th>
+                <th>City</th>
+                <th>Building Number</th>
+                <th>Hotel Name</th>
+                <th>Photo</th>
+                <th>See availability</th>
+            </tr>
+        </thead>
+        <tbody>
 
-<table class="table table-striped table-bordered bg-light">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Capacity</th>
-            <th>Price per night</th>
-            <th>Country</th>
-            <th>City</th>
-            <th>Building Number</th>
-            <th>IdHotel</th>
-            <th>Photo</th>
-            <th>See availability</th>
-        </tr>
-    </thead>
-    <tbody>
-
-            @foreach (var roomElement in roomAndPhotos)
+            @foreach (var roomElement in roomAndPhotosList)
             {
                 <tr>
                     <td>@roomElement.Name</td>
@@ -67,88 +59,68 @@
                     <td>@roomElement.Country</td>
                     <td>@roomElement.City</td>
                     <td>@roomElement.BuildingNumber</td>
-                    <td>@roomElement.HotelId</td>
+                    <td>@roomElement.NameHotel</td>
                     <td><img src=" @($"data:image /png;base64,{Convert.ToBase64String(@roomElement.PhotoResource)}")" alt="Zdjęcie" width="300" height="200" /></td>
                     <td><a class="btn btn-primary" href="/createReservation/@roomElement.Id">Check</a></td>
                 </tr>
             }
-    </tbody>
-</table>
+        </tbody>
+    </table>
 }
+
+
 @code {
-    public List<RoomDto> Rooms = new List<RoomDto>();
-    public List<RoomDto> Pokoje = new List<RoomDto>();
+    public List<RoomAndImageDto> roomAndPhotosList = new List<RoomAndImageDto>();
     public string miasto = string.Empty;
     public string hotel = string.Empty;
-    public int IdHotel = 0;
-    public List<string> City = new List<string>();
+    public List<string> Cities = new List<string>();
     public List<string> Hotels = new List<string>();
-    public RoomAndImageDto RoomandImage;
-    public List<RoomAndImageDto> roomAndPhotos = new List<RoomAndImageDto>();
-    public List<HotelDto> hotelsList = new List<HotelDto>();
 
     protected override async Task OnInitializedAsync()
     {
         await GetRooms();
+        await Search();
     }
-    private async Task GetRooms()
+
+    private async Task Search()
     {
-        City.Clear();
-        hotelsList.Clear();
-        roomAndPhotos.Clear();
-        Rooms = (await IRoomService.GetRooms()).Rooms.ToList();
-        if (miasto != string.Empty)
+        roomAndPhotosList.Clear();
+        if (hotel != string.Empty)
         {
-            hotelsList = (await IHotelServ.GetHotels()).Hotels.Where(x => x.City == miasto).ToList();
-        }
-        if (IdHotel == 0)
-        {
-            Pokoje = (await IRoomService.GetRooms()).Rooms.Where(x => x.City == miasto).ToList();
+            roomAndPhotosList = (await IRoomService.GetRoomWithPhoto()).RoomsAndImages.Where(x => x.City == miasto && x.NameHotel == hotel).ToList();
         }
         else
         {
-            Pokoje = (await IRoomService.GetRooms()).Rooms.Where(x => x.City == miasto && x.HotelId == IdHotel).ToList();
+            roomAndPhotosList = (await IRoomService.GetRoomWithPhoto()).RoomsAndImages.Where(x => x.City == miasto).ToList();
         }
-        AddCityToList();
-        await AddPhotos();
+        AddHotelToList();
     }
+
+    private async Task GetRooms()
+    {
+        roomAndPhotosList = (await IRoomService.GetRoomWithPhoto()).RoomsAndImages.ToList();
+        AddCityToList();
+    }
+
     public void AddCityToList()
     {
-        City.Add(miasto);
-        foreach (var element in Rooms)
+        foreach (var element in roomAndPhotosList)
         {
-            if (!City.Contains(element.City))
+            if (!Cities.Contains(element.City))
             {
-                City.Add(element.City);
+                Cities.Add(element.City);
             }
         }
     }
-    public async Task AddPhotos()
+
+    public void AddHotelToList()
     {
-        foreach (var element in Pokoje)
+        foreach (var element in roomAndPhotosList)
         {
-            RoomandImage = new RoomAndImageDto
+            if (!Hotels.Contains(element.NameHotel))
             {
-                    Id = element.Id,
-                    ImageId = element.ImageId,
-                    Name = element.Name,
-                    Capacity = element.Capacity,
-                    IsBooked = element.IsBooked,
-                    PricePerNight = element.PricePerNight,
-                    Street = element.Street,
-                    BuildingNumber = element.BuildingNumber,
-                    RoomNumber = element.RoomNumber,
-                    PostalCode = element.PostalCode,
-                    City = element.City,
-                    Country = element.Country,
-                    HotelId = element.HotelId,
-                    PhotoResource = await IRoomService.GetResourseImage(element.ImageId ?? 1)
-            };
-            roomAndPhotos.Add(RoomandImage);
+                Hotels.Add(element.NameHotel);
+            }
         }
-    }
-    private void Cancel()
-    {
-        NavigationManager.NavigateTo("/searchrooms");
     }
 }

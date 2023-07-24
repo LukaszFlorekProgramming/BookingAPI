@@ -37,8 +37,9 @@ namespace Application.UnitTests.Reservation.Commands.UpdateReservation
                 EndDate = DateTime.Now.AddDays(1),
                 UserName = "Test2"
             };
+            _context.SaveChanges();
             var result = await _handler.Handle(command, CancellationToken.None);
-            var dir = await _context.Reservations.FirstAsync(x => x.Id == 11, CancellationToken.None);
+            var dir = await _context.Reservations.FirstAsync(x => x.Id == 123, CancellationToken.None);
             dir.ShouldNotBeNull();
             dir.UserName.ShouldBe("Test2");
         }

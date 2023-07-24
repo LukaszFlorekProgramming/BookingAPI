@@ -13,13 +13,10 @@ namespace Booking.Application.Reservations.Commands.DeleteReservation
     public class DeleteReservationCommandHandler : IRequestHandler<DeleteReservationCommand>
     {
         private readonly IReservationDbContext _context;
-
-        
         public DeleteReservationCommandHandler(IReservationDbContext reservationDbContext)
         {
             _context = reservationDbContext;
         }
-
         public async Task Handle(DeleteReservationCommand request, CancellationToken cancellationToken)
         {
             var reservation = await _context.Reservations.Where(x => x.Id == request.ReservationId).FirstOrDefaultAsync(cancellationToken);

@@ -12,7 +12,6 @@ namespace Booking.Domain.Entities
         public string Name { get; set; } = string.Empty;
         public string City { get; set; }
         public string Country { get; set; }
-
         public ICollection<Room> Rooms { get; set; }
 
     }

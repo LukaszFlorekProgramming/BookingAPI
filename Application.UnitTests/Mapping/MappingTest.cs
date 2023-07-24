@@ -13,18 +13,15 @@ namespace Application.UnitTests.Mapping
     {
         public readonly IConfigurationProvider _configuration;
         public readonly IMapper _mapper;
-
         public MappingTest(MappingTestFixture fixture)
         {
             _configuration = fixture.ConfigurationProvider;
             _mapper = fixture.Mapper;
         }
-
         [Fact]
         public void ShouldHaveValidConfiguration()
         {
             _configuration.AssertConfigurationIsValid();
         }
-
     }
 }

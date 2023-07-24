@@ -35,9 +35,9 @@ namespace Booking.Application.Rooms.Commands.UpdateRoom
                 ImageId = request.ImageId
 
             };
-
             _context.Rooms.Update(room);
             await _context.SaveChangesAsync(cancellationToken);
+
             return room;
         }
     }

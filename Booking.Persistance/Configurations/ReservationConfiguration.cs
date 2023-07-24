@@ -14,7 +14,6 @@ namespace Booking.Persistance.Configurations
         public void Configure(EntityTypeBuilder<Reservation> builder)
         {
             builder.HasKey(x => x.Id);
-
         }
     }
 }

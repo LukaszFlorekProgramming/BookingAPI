@@ -14,8 +14,6 @@ builder.Services.AddDbContext<ReservationDbContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
 });
 
-// Add services to the container.
-
 builder.Services.AddApplication();
 builder.Services.AddPersistance();
 builder.Services.AddInfrastructure();
@@ -38,7 +36,7 @@ builder.Services.AddSwaggerGen(c =>
         Title = "BookingApplication",
         Version = "v1",
         Description = "This is an application for information exchange in our Booking project.",
-        Contact = new Microsoft.OpenApi.Models.OpenApiContact
+        Contact = new OpenApiContact
         {
             Name = "£ukasz",
             Email = "lukaszflorek2@gmail.com",

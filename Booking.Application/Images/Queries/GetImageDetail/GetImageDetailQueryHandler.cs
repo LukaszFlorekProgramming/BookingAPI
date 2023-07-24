@@ -20,7 +20,6 @@ namespace Booking.Application.Images.Queries.GetImageDetail
             _context = reservationDbContext;
             _mapper = mapper;
         }
-
         public async Task<ImageDetailVm> Handle(GetImageDetailQuery request, CancellationToken cancellationToken)
         {
             var image = await _context.Images.Where(x => x.Id == request.Id).FirstOrDefaultAsync(cancellationToken);

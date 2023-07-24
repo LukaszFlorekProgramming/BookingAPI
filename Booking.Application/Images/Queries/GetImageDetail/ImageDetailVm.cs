@@ -14,8 +14,6 @@ namespace Booking.Application.Images.Queries.GetImageDetail
     {
         public int Id { get; set; }
         public byte[] PhotoResource { get; set; }
-
-
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Image, ImageDetailVm>().ForMember(x => x.Id, map => map.MapFrom(src => src.Id));

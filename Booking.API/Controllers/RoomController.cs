@@ -22,21 +22,18 @@ namespace Booking.API.Controllers
             var vm = await Mediator.Send(new GetRoomsQuery());
             return vm;
         }
-
         [HttpGet("{id}")]
         public async Task<ActionResult<RoomDetailVm>> GetRoomDetails(int id)
         {
             var vm = await Mediator.Send(new GetRoomDetailQuery() { Id = id });
             return vm;
         }
-
         [HttpPost]
         public async Task<IActionResult> CreateRoom(CreateRoomCommand command)
         {
             var result = await Mediator.Send(command);
             return Ok(result);
         }
-
         [HttpPut]
         public async Task<IActionResult> UpdateRoom(UpdateRoomCommand command)
         {
@@ -55,6 +52,5 @@ namespace Booking.API.Controllers
             await Mediator.Send(new DeleteRoomCommand() { Id = id });
             return Ok();
         }
-
     }
 }

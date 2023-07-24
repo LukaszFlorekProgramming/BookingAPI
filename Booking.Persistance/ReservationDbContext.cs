@@ -17,7 +17,7 @@ namespace Booking.Persistance
         private readonly IDateTime _dateTime;
         public ReservationDbContext(DbContextOptions<ReservationDbContext> options,IDateTime dateTime) : base(options)
         {
-            _dateTime=dateTime;
+            _dateTime = dateTime;
         }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Room> Rooms { get; set; }

@@ -14,7 +14,6 @@ namespace Booking.Application.Mappings
         {
             ApplyMappingsFromAssembly(Assembly.GetExecutingAssembly());
         }
-
         private void ApplyMappingsFromAssembly(Assembly assembly)
         {
             var types = assembly.GetExportedTypes().Where(x => x.GetInterfaces().Any(x =>

@@ -49,6 +49,5 @@ namespace Booking.API.Controllers
             await Mediator.Send(new DeleteReservationCommand() { ReservationId = id});
             return Ok();
         }
-
     }
 }

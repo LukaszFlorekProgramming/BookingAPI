@@ -26,8 +26,6 @@ namespace Booking.Application.Images.Commands.CreateImage
             _context.Images.Add(image);
             await _context.SaveChangesAsync(cancellationToken);
             return image.Id;
-
-
         }
     }
 }

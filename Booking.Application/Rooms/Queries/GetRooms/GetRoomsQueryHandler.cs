@@ -15,13 +15,11 @@ namespace Booking.Application.Rooms.Queries.GetRooms
     {
         private readonly IReservationDbContext _context;
         private IMapper _mapper;
-
         public GetRoomsQueryHandler(IReservationDbContext reservationDbContext, IMapper mapper)
         {
             _context = reservationDbContext;
             _mapper = mapper;
         }
-
         public async Task<RoomsVm> Handle(GetRoomsQuery request, CancellationToken cancellationToken)
         {
             var rooms = await _context.Rooms.AsNoTracking().ProjectTo<RoomDto>(_mapper.ConfigurationProvider).ToListAsync();

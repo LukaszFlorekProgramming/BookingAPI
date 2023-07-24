@@ -12,7 +12,6 @@ namespace Booking.Application.Rooms.Commands.CreateRoom
     public class CreateRoomCommandHandler : IRequestHandler<CreateRoomCommand, int>
     {
         private readonly IReservationDbContext _context;
-
         public CreateRoomCommandHandler(IReservationDbContext reservationDbContext)
         {
             _context = reservationDbContext;
@@ -34,10 +33,9 @@ namespace Booking.Application.Rooms.Commands.CreateRoom
                 ImageId = request.ImageId,
                 HotelId = request.HotelId
             };
-
             _context.Rooms.Add(room);
-
             await _context.SaveChangesAsync(cancellationToken);
+
             return room.Id;
         }
     }

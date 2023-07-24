@@ -9,7 +9,6 @@ namespace Booking.Persistance.Configurations
         public void Configure(EntityTypeBuilder<Room> builder)
         {
             builder.HasKey(x => x.Id);
-
             builder.Property(x => x.Name).HasMaxLength(40);
             builder.Property(x => x.Name).IsRequired();
             builder.Property(x => x.Capacity).IsRequired();

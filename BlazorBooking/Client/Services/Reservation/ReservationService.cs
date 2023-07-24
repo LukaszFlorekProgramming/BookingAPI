@@ -13,34 +13,28 @@ namespace BlazorBooking.Client.Services.Reservation
         {
             _httpClient = httpClient;
         }
-
         public async Task<ReservationDto> CreateRerservation(ReservationDto reservationDto)
         {
             var response = await _httpClient.PostAsJsonAsync("api/reservations", reservationDto);
             return reservationDto;
         }
-
         public async Task DeleteReservation(int id)
         {
             var response = await _httpClient.DeleteAsync($"/api/reservations/{id}");
         }
-
         public async Task<ReservationsVm> GetReservations()
         {
             return await _httpClient.GetFromJsonAsync<ReservationsVm>("api/reservations/GetReservations");
         }
-
         public async Task<byte[]> GetResourseImage(int idImage)
         {
             var image = await _httpClient.GetFromJsonAsync<ImageDto>($"api/images/{idImage}");
             return image.PhotoResource;
         }
-
         public async Task<RoomDto> GetRoom(int idRoom)
         {
             var room = await _httpClient.GetFromJsonAsync<RoomDto>($"api/rooms/{idRoom}");
             return room;
-
         }
     }
 }

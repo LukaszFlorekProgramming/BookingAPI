@@ -11,18 +11,15 @@ namespace BlazorBooking.Client.Services.Room
         {
             _httpClient = httpClient;
         }
-
         public async Task<RoomDto> CreateRoom(RoomDto roomDto)
         {
             var response = await _httpClient.PostAsJsonAsync("api/rooms", roomDto);
             return roomDto;
         }
-
         public async Task<RoomsVm> GetRooms()
         {
             return await _httpClient.GetFromJsonAsync<RoomsVm>("api/rooms/GetRooms");
         }
-
         public async Task DeleteRoom(int roomId)
         {
             var response = await _httpClient.DeleteAsync($"/api/rooms/{roomId}");
@@ -32,18 +29,15 @@ namespace BlazorBooking.Client.Services.Room
             var response = await _httpClient.PutAsJsonAsync("api/rooms", roomDto);
             return roomDto;
         }
-
         public async Task<RoomDto> GetRoomDetails(int id)
         {
             return await _httpClient.GetFromJsonAsync<RoomDto>($"api/rooms/{id}");
         }
-
         public async Task<byte[]> GetResourseImage(int idImage)
         {
             var image = await _httpClient.GetFromJsonAsync<ImageDto>($"api/images/{idImage}");
             return image.PhotoResource;
         }
-
         public async Task<RoomsAndImagesVm> GetRoomWithPhoto()
         {
             return await _httpClient.GetFromJsonAsync<RoomsAndImagesVm>("api/roomsandimages/GetRoomsWithPhotos");

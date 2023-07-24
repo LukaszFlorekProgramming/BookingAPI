@@ -16,7 +16,6 @@ namespace Booking.Application.Images.Commands.DeleteImage
         {
             _context = reservationDbContext;
         }
-
         public async Task<int> Handle(DeleteImageCommand request, CancellationToken cancellationToken)
         {
             var image = await _context.Images.Where(x => x.Id == request.Id).FirstOrDefaultAsync();
@@ -24,7 +23,5 @@ namespace Booking.Application.Images.Commands.DeleteImage
             await _context.SaveChangesAsync(cancellationToken);
             return image.Id;
         }
-
-        
     }
 }

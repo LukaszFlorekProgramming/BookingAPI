@@ -32,9 +32,7 @@ builder.Services.AddHttpClient<IHotelService, HotelService>(client =>
     client.BaseAddress = new Uri("https://localhost:44318/");
 });
 
-// Supply HttpClient instances that include access tokens when making requests to the server project
 builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("BlazorBooking.ServerAPI"));
-
 builder.Services.AddApiAuthorization();
 
 await builder.Build().RunAsync();

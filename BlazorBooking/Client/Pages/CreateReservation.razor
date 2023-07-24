@@ -39,33 +39,6 @@
 
 </div>
 
-<table class="table table-striped table-bordered bg-light">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Start date</th>
-            <th>End date</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (MyreservationsList == null)
-        {
-            <p><em>Loading...</em></p>
-        }
-        else
-        {
-            @foreach (var reservationElement in MyreservationsList)
-            {
-                <tr>
-                    <td>@reservationElement.Id</td>
-                    <td>@reservationElement.StartDate</td>
-                    <td>@reservationElement.EndDate</td>
-                </tr>
-            }
-        }
-    </tbody>
-</table>
-
 @code {
     [Parameter]
     public int IdRoom { get; set; }

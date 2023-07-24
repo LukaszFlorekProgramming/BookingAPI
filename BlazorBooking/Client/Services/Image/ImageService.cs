@@ -15,13 +15,10 @@ namespace BlazorBooking.Client.Services.Image
             var response = await _httpClient.PostAsJsonAsync("api/images", imageDto);
             return imageDto;
         }
-
         public async Task DeleteImage(int id)
         {
             var response = await _httpClient.DeleteAsync($"/api/images/{id}");
         }
-
-
         public async Task<ImagesVm> GetImages()
         {
             return await _httpClient.GetFromJsonAsync<ImagesVm>("api/images/GetImages");

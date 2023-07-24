@@ -17,13 +17,11 @@ namespace Booking.Application.Rooms.Queries.GetRoomsAndImages
     {
         private readonly IReservationDbContext _context;
         private IMapper _mapper;
-
         public GetRoomsAndImagesQueryHandler(IReservationDbContext reservationDbContext, IMapper mapper)
         {
             _context = reservationDbContext;
             _mapper = mapper;
         }
-
         public async Task<RoomsAndImagesVm> Handle(GetRoomsAndImagesQuery request, CancellationToken cancellationToken)
         {
             var RoomsAndImages = await _context.Rooms.Include(x => x.Hotel).ProjectTo<RoomAndImageDto>(_mapper.ConfigurationProvider).ToListAsync();

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Booking.Domain.Entities
 {
-    public class Reservation : AuditableEntity
+    public class Reservation
     {
         public int Id { get; set; }
         public DateTime StartDate { get; set; }

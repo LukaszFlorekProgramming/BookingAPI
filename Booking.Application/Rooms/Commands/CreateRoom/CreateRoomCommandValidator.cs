@@ -8,6 +8,5 @@ namespace Booking.Application.Rooms.Commands.CreateRoom
 {
     public class CreateRoomCommandValidator
     {
-
     }
 }

@@ -13,7 +13,6 @@ namespace Booking.Application.Images.Queries.GetImages
     {
         public int Id { get; set; }
         public byte[] PhotoResource { get; set; }
-
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Image, ImageDto>()

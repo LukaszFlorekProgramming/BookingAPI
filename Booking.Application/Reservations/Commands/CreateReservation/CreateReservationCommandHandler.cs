@@ -27,13 +27,10 @@ namespace Booking.Application.Reservations.Commands.CreateReservation
                 UserName = request.UserName
                 
             };
-
             _context.Reservations.Add(reservation);
-
             await _context.SaveChangesAsync(cancellationToken);
 
             return reservation.Id;
-
         }
     }
 }

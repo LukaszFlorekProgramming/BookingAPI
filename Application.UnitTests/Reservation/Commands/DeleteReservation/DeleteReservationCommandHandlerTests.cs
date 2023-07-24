@@ -22,8 +22,7 @@ namespace Application.UnitTests.Reservation.Commands.DeleteReservation
         [Fact]
         public async Task Handle_GivenValidRequest_ShouldDeleteReservation()
         {
-            var command = new DeleteReservationCommand()
-            { ReservationId = 11 };
+            var command = new DeleteReservationCommand(){ ReservationId = 11 };
             await _handler.Handle(command, CancellationToken.None);
         }
     }

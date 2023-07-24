@@ -15,6 +15,5 @@ namespace Booking.Application.Interfaces
         DbSet<Image> Images { get; set; }
         DbSet<Hotel> Hotels { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
-        
     }
 }

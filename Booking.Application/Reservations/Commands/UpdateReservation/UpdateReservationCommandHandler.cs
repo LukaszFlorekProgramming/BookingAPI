@@ -28,9 +28,7 @@ namespace Booking.Application.Reservations.Commands.UpdateReservation
                 EndDate = request.EndDate,
                 UserName = request.UserName
             };
-
             _context.Reservations.Update(reservation);
-
             await _context.SaveChangesAsync(cancellationToken);
 
             return reservation;

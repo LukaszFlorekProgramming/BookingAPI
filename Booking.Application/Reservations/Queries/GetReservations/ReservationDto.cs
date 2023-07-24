@@ -16,7 +16,6 @@ namespace Booking.Application.Reservations.Queries.GetReservations
         public DateTime EndDate { get; set; }
         public string UserName { get; set; }
         public int? RoomId { get; set; }
-
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Reservation, ReservationDto>()

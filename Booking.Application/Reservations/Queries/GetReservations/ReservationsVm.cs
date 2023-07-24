@@ -14,6 +14,5 @@ namespace Booking.Application.Reservations.Queries.GetReservations
     public class ReservationsVm
     {
         public ICollection<ReservationDto> Reservations { get; set; }
-        
     }
 }

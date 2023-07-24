@@ -22,6 +22,5 @@ namespace Booking.Application.Rooms.Commands.UpdateRoom
         public string City { get; set; }
         public string Country { get; set; }
         public int? ImageId { get; set; }
-
     }
 }

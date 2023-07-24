@@ -73,6 +73,7 @@
     public List<RoomAndImageDto> roomAndPhotosList = new List<RoomAndImageDto>();
     public string miasto = string.Empty;
     public string hotel = string.Empty;
+    public string hotelchange = string.Empty;
     public List<string> Cities = new List<string>();
     public List<string> Hotels = new List<string>();
 
@@ -84,10 +85,13 @@
 
     private async Task Search()
     {
+        hotelchange = hotel;
+        hotel = string.Empty;
+        Hotels.Clear();
         roomAndPhotosList.Clear();
-        if (hotel != string.Empty)
+        if (hotelchange != string.Empty)
         {
-            roomAndPhotosList = (await IRoomService.GetRoomWithPhoto()).RoomsAndImages.Where(x => x.City == miasto && x.NameHotel == hotel).ToList();
+            roomAndPhotosList = (await IRoomService.GetRoomWithPhoto()).RoomsAndImages.Where(x => x.City == miasto && x.NameHotel == hotelchange).ToList();
         }
         else
         {

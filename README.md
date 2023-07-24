@@ -36,24 +36,31 @@ It's time to quickly talk about the application.
 ### Main layout
 The front-end of my app is based on Blazor.
 
-![image](https://github.com/LukaszFlorekProgramming/BookingAPI/assets/56117955/7dfa1ad5-7ff4-4f9b-b89c-af629853a51f)
+![image](https://github.com/LukaszFlorekProgramming/BookingAPI/assets/56117955/aa5b375b-5bb0-4346-889d-a2bdf46af0aa)
+
 
 Let's start with searching for an interesting apartment.
 
-### Search Reservation
-To search for the apartment you are interested in, use the drop-down list and then press the search button. Then choose the best apartment and press the check button. You will be redirected to the subpage create reservations.
+### Search Apartament
+To search for the apartment you are interested in, use the drop-down list and then press the search button.
 
-![image](https://github.com/LukaszFlorekProgramming/BookingAPI/assets/56117955/df8b2675-e7f0-4746-be84-f55e0559bbdf)
+![image](https://github.com/LukaszFlorekProgramming/BookingAPI/assets/56117955/7148f32f-cc52-4c74-97e3-bf364a10d79b)
+
+Then choose the best apartment and press the check button. You will be redirected to the subpage create reservations.
+
+
 
 ### Create Reservation
 The app will then ask you to enter the start and end dates for your booking. Unfortunately, date validation is not implemented yet.
 
-![image](https://github.com/LukaszFlorekProgramming/BookingAPI/assets/56117955/3c3d82fc-91bb-4950-8f4d-e47886750d53)
+![image](https://github.com/LukaszFlorekProgramming/BookingAPI/assets/56117955/d31ad47f-fd03-4fef-a66f-bbe5bb54647e)
+
 
 ### My Reservation
 If all entered data is verified, the application will create a new reservation and redirect you to the My reservations subpage. Reservations related to the logged in account will appear on the subpage.
 
-![image](https://github.com/LukaszFlorekProgramming/BookingAPI/assets/56117955/d599bbdc-e7bc-4ef0-916e-ca45a26c9ebc)
+![image](https://github.com/LukaszFlorekProgramming/BookingAPI/assets/56117955/acb75e0d-8c06-4585-9fcc-80bc92bd7422)
+
 
 ## It's still not everything
 

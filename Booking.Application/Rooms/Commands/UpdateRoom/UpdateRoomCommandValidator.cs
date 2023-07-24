@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Booking.Application.Rooms.Commands.CreateRoom
+namespace Booking.Application.Rooms.Commands.UpdateRoom
 {
-    public class CreateRoomCommandValidator : AbstractValidator<CreateRoomCommand>
+    public class UpdateRoomCommandValidator : AbstractValidator<UpdateRoomCommand>
     {
-        public CreateRoomCommandValidator()
+        public UpdateRoomCommandValidator()
         {
             RuleFor(x => x.Name)
                 .NotEmpty()
@@ -59,7 +59,6 @@ namespace Booking.Application.Rooms.Commands.CreateRoom
                .MaximumLength(120)
                .Matches("^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ0-9 ]*$")
                .WithMessage("The Country field can only contain letters numbers and spaces including Polish characters.");
-
         }
     }
 }

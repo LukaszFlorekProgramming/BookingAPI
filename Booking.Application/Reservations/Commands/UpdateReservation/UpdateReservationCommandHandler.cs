@@ -1,6 +1,7 @@
 ﻿using Booking.Application.Interfaces;
 using Booking.Application.Reservations.Commands.CreateReservation;
 using Booking.Domain.Entities;
+using FluentValidation;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -13,13 +14,20 @@ namespace Booking.Application.Reservations.Commands.UpdateReservation
     public class UpdateReservationCommandHandler : IRequestHandler<UpdateReservationCommand, Reservation>
     {
         private readonly IReservationDbContext _context;
+        private readonly IValidator<UpdateReservationCommand> _validator;
 
-        public UpdateReservationCommandHandler(IReservationDbContext reservationDbContext)
+        public UpdateReservationCommandHandler(IReservationDbContext reservationDbContext, IValidator<UpdateReservationCommand> validator)
         {
             _context = reservationDbContext;
+            _validator = validator;
         }
         public async Task<Reservation> Handle(UpdateReservationCommand request, CancellationToken cancellationToken)
         {
+            var validationResult = _validator.Validate(request);
+            if (!validationResult.IsValid)
+            {
+                throw new ValidationException(validationResult.Errors);
+            }
             Reservation reservation = new()
             {
                 Id = request.Id,

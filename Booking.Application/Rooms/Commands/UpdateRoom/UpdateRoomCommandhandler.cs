@@ -1,5 +1,6 @@
 ﻿using Booking.Application.Interfaces;
 using Booking.Domain.Entities;
+using FluentValidation;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -12,13 +13,21 @@ namespace Booking.Application.Rooms.Commands.UpdateRoom
     public class UpdateRoomCommandhandler : IRequestHandler<UpdateRoomCommand, Room>
     {
         private readonly IReservationDbContext _context;
+        private readonly IValidator<UpdateRoomCommand> _validator;
 
-        public UpdateRoomCommandhandler(IReservationDbContext reservationDbContext)
+        public UpdateRoomCommandhandler(IReservationDbContext reservationDbContext, IValidator<UpdateRoomCommand> validator)
         {
             _context = reservationDbContext;
+            _validator = validator;
         }
         public async Task<Room> Handle(UpdateRoomCommand request, CancellationToken cancellationToken)
         {
+            var validationResult = _validator.Validate(request);
+            if (!validationResult.IsValid)
+            {
+                throw new ValidationException(validationResult.Errors);
+            }
+
             Room room = new Room()
             {
                 Id = request.Id,

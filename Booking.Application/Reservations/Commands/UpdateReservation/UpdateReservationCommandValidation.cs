@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Booking.Application.Reservations.Commands.CreateReservation
+namespace Booking.Application.Reservations.Commands.UpdateReservation
 {
-    public class CreateReservationCommandValidator : AbstractValidator<CreateReservationCommand>
+    public class UpdateReservationCommandValidation : AbstractValidator<UpdateReservationCommand>
     {
-        public CreateReservationCommandValidator()
+        public UpdateReservationCommandValidation()
         {
             RuleFor(x => x.RoomId)
                 .NotNull();

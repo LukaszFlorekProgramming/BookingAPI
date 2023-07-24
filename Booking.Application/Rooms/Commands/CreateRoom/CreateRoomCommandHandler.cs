@@ -1,5 +1,6 @@
 ﻿using Booking.Application.Interfaces;
 using Booking.Domain.Entities;
+using FluentValidation;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -12,12 +13,20 @@ namespace Booking.Application.Rooms.Commands.CreateRoom
     public class CreateRoomCommandHandler : IRequestHandler<CreateRoomCommand, int>
     {
         private readonly IReservationDbContext _context;
-        public CreateRoomCommandHandler(IReservationDbContext reservationDbContext)
+        private readonly IValidator<CreateRoomCommand> _validator;
+        public CreateRoomCommandHandler(IReservationDbContext reservationDbContext, IValidator<CreateRoomCommand> validator)
         {
             _context = reservationDbContext;
+            _validator = validator;
         }
         public async Task<int> Handle(CreateRoomCommand request, CancellationToken cancellationToken)
         {
+            var validationResult = _validator.Validate(request);
+            if (!validationResult.IsValid)
+            {
+                throw new ValidationException(validationResult.Errors);
+            }
+
             Room room = new()
             {
                 Name = request.Name,
